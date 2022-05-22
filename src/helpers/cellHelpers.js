@@ -114,7 +114,7 @@ const wall = (props) => {
             />
             <div
               style={doorData.doorStyle}
-              onClick={() => changeThisDoorState(wall)}
+              onClick={() => changeThisDoorState(door)}
             >
               <img
                 src={doorImage}

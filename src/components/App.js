@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Map from "../containers/Map";
 
 import Images from "../constants/Images";
-import ApiServices from "../services/ApiServices";
+import { RequestGameData } from "../services/ApiServices";
 import styles from "../styles/App";
 // import CharacterModal from "../containers/CharacterModal";
 // import AtackModal from "../containers/AtackModal";
@@ -22,7 +22,7 @@ const App = (props) => {
     };
 
     //   closeModal();
-    const service = ApiServices();
+    const service = RequestGameData("01");
     service.then((answer) => {
       console.log(answer.data);
       setStateAfterRequest(answer.data);

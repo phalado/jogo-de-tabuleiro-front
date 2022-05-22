@@ -27,7 +27,12 @@ const setDoors = (doors) => ({
 
 const setGameData = (data) => ({
   type: "SET_GAME_DATA",
-  data
+  data,
+});
+
+const changeZoomedMap = (minimap) => ({
+  type: "CHANGE_ZOOMED_MAP",
+  minimap,
 });
 
 // const openModal = (data) => ({
@@ -60,4 +65,5 @@ export {
   doorsInitialState,
   setDoors,
   setGameData,
+  changeZoomedMap,
 };

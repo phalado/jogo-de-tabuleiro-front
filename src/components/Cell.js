@@ -6,34 +6,35 @@ import styles from "../styles/Cell";
 import chestStyles from "../styles/Chest";
 
 import wall from "../helpers/cellHelpers";
+import { openDoor } from "../services/ApiServices";
 
 const Cell = (props) => {
-  const { cell, minimapPosition, doors } = props;
+  const { cell, minimapPosition, doors, zoomedMap, setDoors } = props;
 
   const { north, south, east, west, inside, noise, enemyPortal } = cell;
   const floor = inside ? Images.floorWood : Images.floorRocks;
 
-  // const canOpenDoor = (door) => {
-  //   return (
-  //     zoomedMap > -1 &&
-  //     players[gameData.currentPlayer].minimap === minimapIndex &&
-  //     players[gameData.currentPlayer].cell === cellIndex &&
-  //     doors[door].closed &&
-  //     gameData.generalActions + gameData.sceneryActions > 0
-  //   );
-  // };
+  const canOpenDoor = (door) => {
+    return (
+      zoomedMap > -1 &&
+      // players[gameData.currentPlayer].minimap === minimapIndex &&
+      // players[gameData.currentPlayer].cell === cellIndex &&
+      door.closed
+      // gameData.generalActions + gameData.sceneryActions > 0
+    );
+  };
 
   const changeThisDoorState = (door) => {
-    //   if (canOpenDoor(door)) {
-    //     changeDoorState({ door, newState: false });
-    //     addSoundToCell({
-    //       minimap: players[gameData.currentPlayer].minimap,
-    //       cell: players[gameData.currentPlayer].cell,
-    //     });
-
-    //     if (gameData.sceneryActions > 0) changeActionsCount("sceneryActions");
-    //     else changeActionsCount("generalActions");
-    //   }
+    if (canOpenDoor(door)) {
+      const service = openDoor(door.name, false);
+      service.then((answer) => setDoors(answer.data));
+      // addSoundToCell({
+      //   minimap: players[gameData.currentPlayer].minimap,
+      //   cell: players[gameData.currentPlayer].cell,
+      // });
+      // if (gameData.sceneryActions > 0) changeActionsCount("sceneryActions");
+      // else changeActionsCount("generalActions");
+    }
     return null;
   };
 
@@ -130,7 +131,6 @@ const Cell = (props) => {
     );
   };
 
-  console.log(minimapPosition, cell);
   return (
     <div style={styles.container}>
       <img src={floor} style={styles.wholeImage} alt="Floor" />

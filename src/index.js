@@ -12,6 +12,7 @@ let initialState = {
   doors: [],
   gameData: {},
   minimaps: [],
+  zoomedMap: -1,
 };
 
 const store = createStore(

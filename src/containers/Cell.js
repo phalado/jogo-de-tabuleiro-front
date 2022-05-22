@@ -1,24 +1,17 @@
 import { connect } from "react-redux";
 
 import Cell from "../components/Cell";
-// import {
-//   addSoundToCell,
-//   changeActionsCount,
-//   changeDoorState,
-//   openModal,
-// } from "../actions";
+import { setDoors } from "../actions";
 
 const mapStateToProps = (state) => ({
   chests: state.chests,
   doors: state.doors,
   gameData: state.gameData,
+  zoomedMap: state.zoomedMap,
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   changeDoorState: (door) => dispatch(changeDoorState(door)),
-//   openModal: (data) => dispatch(openModal(data)),
-//   changeActionsCount: (action) => dispatch(changeActionsCount(action)),
-//   addSoundToCell: (data) => dispatch(addSoundToCell(data)),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  setDoors: (doors) => dispatch(setDoors(doors)),
+});
 
-export default connect(mapStateToProps, null)(Cell);
+export default connect(mapStateToProps, mapDispatchToProps)(Cell);
