@@ -10,9 +10,10 @@ import "./index.css";
 let initialState = {
   chests: [],
   doors: [],
-  gameData: {},
+  gameData: { round: 0, open: false },
   minimaps: [],
   zoomedMap: -1,
+  characters: [],
 };
 
 const store = createStore(

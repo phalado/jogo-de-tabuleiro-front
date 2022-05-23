@@ -1,6 +1,6 @@
 import React from "react";
 
-// import Chest from "./Chest";
+import Chest from "./Chest";
 import Images from "../constants/Images";
 import styles from "../styles/Cell";
 import chestStyles from "../styles/Chest";
@@ -9,7 +9,16 @@ import wall from "../helpers/cellHelpers";
 import { openDoor } from "../services/ApiServices";
 
 const Cell = (props) => {
-  const { cell, minimapPosition, doors, zoomedMap, setDoors } = props;
+  const {
+    cell,
+    minimapPosition,
+    doors,
+    zoomedMap,
+    chests,
+    characters,
+    setDoors,
+    setChests,
+  } = props;
 
   const { north, south, east, west, inside, noise, enemyPortal } = cell;
   const floor = inside ? Images.floorWood : Images.floorRocks;
@@ -26,8 +35,7 @@ const Cell = (props) => {
 
   const changeThisDoorState = (door) => {
     if (canOpenDoor(door)) {
-      const service = openDoor(door.name, false);
-      service.then((answer) => setDoors(answer.data));
+      openDoor(door.name, false).then((answer) => setDoors(answer.data));
       // addSoundToCell({
       //   minimap: players[gameData.currentPlayer].minimap,
       //   cell: players[gameData.currentPlayer].cell,
@@ -71,36 +79,43 @@ const Cell = (props) => {
     return null;
   };
 
+  const chest = chests.find(
+    (chest) => chest.minimap === minimapPosition && chest.cell === cell.position
+  );
+
+  // console.log(characters);
+  const cellCharacters = characters.filter(
+    (chest) => chest.minimap === minimapPosition && chest.cell === cell.position
+  );
+  // console.log(cellCharacters);
+
   const insideElements = () => {
     return (
       <div style={styles.insideElements}>
-        {/* {!chest ? null : (
+        {!chest ? null : (
           <Chest
-            color={chests[chest].color}
-            chestState={chests[chest].closed}
+            name={chest.name}
+            color={chest.color}
+            chestState={chest.closed}
+            setChests={setChests}
           />
-        )} */}
-        {/* {Object.entries(players).map(([key, value]) => {
-          if (value.minimap === minimapIndex && value.cell === cellIndex) {
-            return (
-              <div
-                style={chestStyles.container}
-                key={[key, value]}
-                onClick={() =>
-                  openModal({ heroCharacter: true, character: key })
-                }
-              >
-                <img
-                  src={Images.player[key]}
-                  style={chestStyles.pin}
-                  alt="Pin"
-                />
-              </div>
-            );
-          }
-
-          return null;
-        })} */}
+        )}
+        {cellCharacters.map((character) => {
+          console.log(character);
+          return (
+            <div
+              style={chestStyles.container}
+              key={character}
+              // onClick={() => openModal({ heroCharacter: true, character: key })}
+            >
+              <img
+                src={Images.player[character.characterType]}
+                style={chestStyles.pin}
+                alt={character.characterType}
+              />
+            </div>
+          );
+        })}
         {/* {Object.entries(enemies).map(([key, value]) => {
           if (value.minimap === minimapIndex && value.cell === cellIndex) {
             return (

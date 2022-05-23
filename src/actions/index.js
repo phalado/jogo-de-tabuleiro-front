@@ -16,6 +16,15 @@ const setChests = (chests) => ({
   chests,
 });
 
+const charactersInitialState = () => ({
+  type: "CHARACTERS_INITIAL_STATE",
+});
+
+const setCharacters = (characters) => ({
+  type: "SET_CHARACTERS",
+  characters,
+});
+
 const doorsInitialState = () => ({
   type: "DOORS_INITIAL_STATE",
 });
@@ -66,4 +75,6 @@ export {
   setDoors,
   setGameData,
   changeZoomedMap,
+  charactersInitialState,
+  setCharacters,
 };

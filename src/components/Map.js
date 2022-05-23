@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import MiniMap from "./MiniMap";
 // import ActionSubMenu from "../containers/ActionSubMenu";
@@ -18,13 +18,11 @@ const Map = (props) => {
 
   //   setMinimaps(minimaps);
   // };
-  console.log(zoomedMap);
 
   if (minimaps === []) return null;
 
   if (zoomedMap > -1) {
     const minimap = minimaps.find((minimap) => minimap.position === zoomedMap);
-    console.log(minimap);
 
     return (
       <div style={styles.container}>
@@ -55,17 +53,22 @@ const Map = (props) => {
 
   return (
     <div style={styles.container}>
-      {minimaps.map((minimap) => {
-        return (
-          <div
-            style={styles.minimap}
-            onClick={() => changeZoomedMap(minimap.position)}
-            key={minimap.position}
-          >
-            <MiniMap minimapPosition={minimap.position} cells={minimap.cells} />
-          </div>
-        );
-      })}
+      {minimaps
+        .sort((a, b) => a.position - b.position)
+        .map((minimap) => {
+          return (
+            <div
+              style={styles.minimap}
+              onClick={() => changeZoomedMap(minimap.position)}
+              key={minimap.position}
+            >
+              <MiniMap
+                minimapPosition={minimap.position}
+                cells={minimap.cells}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 };

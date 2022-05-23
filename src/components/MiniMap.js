@@ -9,15 +9,17 @@ const MiniMap = (props) => {
 
   return (
     <div style={styles.container}>
-      {cells.map((cell) => {
-        return (
-          <Cell
-            cell={cell}
-            minimapPosition={minimapPosition}
-            key={[cell, cell.position]}
-          />
-        );
-      })}
+      {cells
+        .sort((a, b) => a.position - b.position)
+        .map((cell) => {
+          return (
+            <Cell
+              cell={cell}
+              minimapPosition={minimapPosition}
+              key={[cell, cell.position]}
+            />
+          );
+        })}
     </div>
   );
 };

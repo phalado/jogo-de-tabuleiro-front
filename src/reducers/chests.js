@@ -3,7 +3,6 @@ const chests = (state = {}, action) => {
     case "CHESTS_INITIAL_STATE":
       return {};
     case "SET_CHESTS":
-      
       return action.chests;
     default:
       return state;

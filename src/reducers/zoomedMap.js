@@ -3,7 +3,6 @@ const zoomedMap = (state = {}, action) => {
     case "ZOOMED_MAP_INITIAL_STATE":
       return 0;
     case "CHANGE_ZOOMED_MAP":
-      console.log(action);
       return action.minimap;
     default:
       return state;

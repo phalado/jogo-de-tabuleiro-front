@@ -131,7 +131,7 @@ const wall = (props) => {
           <img src={doorData.src} style={doorData.style} alt={doorData.alt} />
           <div
             style={doorData.doorStyle}
-            onClick={() => changeThisDoorState(wall)}
+            onClick={() => changeThisDoorState(door)}
           >
             <img src={doorImage} style={styles.wholeImage} alt={doorData.alt} />
           </div>
