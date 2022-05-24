@@ -83,11 +83,9 @@ const Cell = (props) => {
     (chest) => chest.minimap === minimapPosition && chest.cell === cell.position
   );
 
-  // console.log(characters);
   const cellCharacters = characters.filter(
     (chest) => chest.minimap === minimapPosition && chest.cell === cell.position
   );
-  // console.log(cellCharacters);
 
   const insideElements = () => {
     return (
@@ -101,7 +99,6 @@ const Cell = (props) => {
           />
         )}
         {cellCharacters.map((character) => {
-          console.log(character);
           return (
             <div
               style={chestStyles.container}

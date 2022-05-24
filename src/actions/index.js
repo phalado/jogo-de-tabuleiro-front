@@ -44,6 +44,11 @@ const changeZoomedMap = (minimap) => ({
   minimap,
 });
 
+const setCurrentUser = (currentUser) => ({
+  type: "SET_CURRENT_USER",
+  currentUser,
+});
+
 // const openModal = (data) => ({
 //   type: "OPEN_MODAL",
 //   heroCharacter: data.heroCharacter,
@@ -77,4 +82,5 @@ export {
   changeZoomedMap,
   charactersInitialState,
   setCharacters,
+  setCurrentUser
 };

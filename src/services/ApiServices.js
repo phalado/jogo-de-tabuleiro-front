@@ -6,6 +6,20 @@ const headers = {
   "Content-Type": "application/json; charset=utf-8",
 };
 
+const requestUserData = async (user_id) => {
+  const baseUrl = ApiStr.API_URL + "/users/" + user_id;
+  const params = { id: user_id };
+
+  return axios.get(baseUrl, params, { headers });
+};
+
+const loginUser = async (email, password) => {
+  const baseUrl = ApiStr.API_URL + "/users/login";
+  const params = { email, password };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
 const requestGameData = async () => {
   const baseUrl = ApiStr.API_URL + "/games/game_data";
   const params = { id: 1 };
@@ -23,6 +37,13 @@ const createNewGame = async (gameMode) => {
 const createCharacter = async (type) => {
   const baseUrl = ApiStr.API_URL + "/characters";
   const params = { id: 1, character_type: type };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
+const moveCharacter = async (type, direction) => {
+  const baseUrl = ApiStr.API_URL + "/characters/move_character";
+  const params = { id: 1, character_type: type, direction };
 
   return axios.post(baseUrl, params, { headers });
 };
@@ -55,4 +76,7 @@ export {
   openDoor,
   openChest,
   endGame,
+  moveCharacter,
+  requestUserData,
+  loginUser,
 };

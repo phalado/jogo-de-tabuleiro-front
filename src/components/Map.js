@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 import MiniMap from "./MiniMap";
-// import ActionSubMenu from "../containers/ActionSubMenu";
+import ActionSubMenu from "../containers/ActionSubMenu";
 
 import styles from "../styles/Map";
 
 const Map = (props) => {
   const { minimaps, gameData, zoomedMap, changeZoomedMap } = props;
 
-  // const [action, setAction] = useState("menu");
+  const [action, setAction] = useState("menu");
 
   // const resetSounds = () => {
   //   const newMinimaps = [...GameMode01.minimaps];
@@ -39,10 +39,7 @@ const Map = (props) => {
             <span>Açoes de cenário: {gameData.sceneryActions}</span>
             <span>Level da fase: {gameData.gameLevel}</span>
           </div>
-          {/* <ActionSubMenu
-            action={action}
-            setAction={setAction}
-          /> */}
+          <ActionSubMenu action={action} setAction={setAction} />
           <button style={styles.button} onClick={() => changeZoomedMap(-1)}>
             Voltar ao Mapa
           </button>

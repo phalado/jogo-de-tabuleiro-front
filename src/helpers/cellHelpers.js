@@ -1,3 +1,5 @@
+import React from "react";
+
 import Images from "../constants/Images";
 import styles from "../styles/Cell";
 

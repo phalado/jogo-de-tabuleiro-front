@@ -6,6 +6,7 @@ import doors from "./doors";
 import gameData from "./gameData";
 import zoomedMap from "./zoomedMap";
 import characters from "./characters";
+import currentUser from "./currentUser";
 
 const rootReducer = combineReducers({
   minimaps,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   gameData,
   zoomedMap,
   characters,
+  currentUser,
 });
 
 export default rootReducer;
