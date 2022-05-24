@@ -56,8 +56,6 @@ const App = (props) => {
     ["dwarf", "Anão"],
   ];
 
-  console.log(gameData, gameData.round === 0, !gameData.open);
-
   if (gameData.round === 0) {
     if (!gameData.open) {
       return (

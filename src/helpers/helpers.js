@@ -19,7 +19,6 @@ const doorData = (minimap, cell, doors) => {
 };
 
 const possibleMoves = (minimap, cell, doors) => {
-  console.log(doorData(minimap, cell.position, doors));
   const directions = ["north", "south", "east", "west"];
 
   const moves = directions.filter((direction) =>

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { changeZoomedMap, setCharacters } from "../actions";
+import { changeZoomedMap, setCharacters, setChests } from "../actions";
 
 import ActionSubMenu from "../components/ActionSubMenu";
 
@@ -15,6 +15,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeZoomedMap: (minimap) => dispatch(changeZoomedMap(minimap)),
   setCharacters: (characters) => dispatch(setCharacters(characters)),
+  setChests: (chests) => dispatch(setChests(chests)),
   // changeChestState: (chestState) => dispatch(changeChestState(chestState)),
   // addSoundToCell: data => dispatch(addSoundToCell(data)),
 

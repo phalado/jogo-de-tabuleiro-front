@@ -1,4 +1,5 @@
 import React from "react";
+import { ReactSession } from "react-client-session";
 
 import {
   // enemyBestRoute,
@@ -19,7 +20,7 @@ import {
 import Images from "../constants/Images";
 
 import styles from "../styles/Map";
-import { moveCharacter } from "../services/ApiServices";
+import { moveCharacter, openChest } from "../services/ApiServices";
 
 const ActionSubMenu = (props) => {
   const {
@@ -27,15 +28,18 @@ const ActionSubMenu = (props) => {
     doors,
     zoomedMap,
     gameData,
-    // chests,
+    chests,
     action,
     setAction,
     characters,
-    // changeZoomedMap,
+    changeZoomedMap,
     setCharacters,
+    setChests,
   } = props;
 
-  const currentPlayer = characters[0];
+  const currentPlayer = characters.find(
+    (character) => character.userId === ReactSession.get("id")
+  );
   const minimap = minimaps.find((minimap) => minimap.position === zoomedMap);
 
   // const changePlayer = (setMenu) => {
@@ -57,23 +61,19 @@ const ActionSubMenu = (props) => {
   // };
 
   const movePin = (direction) => {
-    console.log(currentPlayer);
-    moveCharacter(currentPlayer.characterType, direction).then((answer) =>
-      setCharacters(answer.data)
-    );
-    // const { minimap, cell } = movementDestiny(
-    //   currentPlayer.minimap,
-    //   currentPlayer.cell,
-    //   direction
-    // );
-
+    moveCharacter(currentPlayer.characterType, direction).then((answer) => {
+      setCharacters(answer.data);
+      const user = answer.data.find(
+        (character) => character.userId === ReactSession.get("id")
+      );
+      changeZoomedMap(user.minimap);
+    });
     // // changeMovementCount();
     // currentPlayer.move({
     //   player: currentPlayer,
     //   minimap,
     //   cell,
     // });
-    // changeZoomedMap(minimap);
     setAction("menu");
   };
 
@@ -167,33 +167,31 @@ const ActionSubMenu = (props) => {
       return null;
     }
 
-    // const chest = minimaps[0][players[gameData.currentPlayer].cell].chest;
+    const chest = chests.find(
+      (chest) =>
+        chest.minimap === zoomedMap && chest.cell === currentPlayer.cell
+    );
 
-    // const openChestButton = () => {
-    //   if (
-    //     chest &&
-    //     chests[chest].closed &&
-    //     gameData.sceneryActions + gameData.generalActions > 0
-    //   ) {
-    //     return (
-    //       <button
-    //         style={styles.button}
-    //         onClick={() => {
-    //           changeChestState({ chest: chest, newState: false });
-    //           addSoundToCell({
-    //             minimap: players[gameData.currentPlayer].minimap,
-    //             cell: players[gameData.currentPlayer].cell,
-    //           });
-    //           if (gameData.moveActions > 0)
-    //             changeActionsCount("sceneryActions");
-    //           else changeActionsCount("generalActions");
-    //         }}
-    //       >
-    //         Abrir baú
-    //       </button>
-    //     );
-    //   }
-    // };
+    const openChestButton = () => {
+      if (
+        chest &&
+        chest.closed
+        // gameData.sceneryActions + gameData.generalActions > 0
+      ) {
+        return (
+          <button
+            style={styles.button}
+            onClick={() => {
+              openChest(chest.name, false).then((answer) =>
+                setChests(answer.data)
+              );
+            }}
+          >
+            Abrir baú
+          </button>
+        );
+      }
+    };
 
     return (
       <div style={styles.moveButtonsContainer}>
@@ -226,15 +224,14 @@ const ActionSubMenu = (props) => {
           }}
         >
           Encerrar ação
-        </button>
-        {openChestButton()} */}
+        </button> */}
+        {openChestButton()}
       </div>
     );
   }
 
   if (currentPlayer.minimap === zoomedMap && action === "move") {
     // if (gameData.generalActions + gameData.moveActions > 0) {
-    console.log(currentPlayer);
     const cell = minimap.cells.find(
       (cell) => cell.position === currentPlayer.cell
     );
@@ -243,9 +240,9 @@ const ActionSubMenu = (props) => {
       cell,
       doors.filter(
         (door) =>
-          (door.cell1.minimap === minimap.position &&
+          (door.cell1.minimap === zoomedMap &&
             door.cell1.cell === cell.position) ||
-          (door.cell2.minimap === minimap.position &&
+          (door.cell2.minimap === zoomedMap &&
             door.cell2.cell === cell.position)
       )
     );

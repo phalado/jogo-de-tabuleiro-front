@@ -1,4 +1,5 @@
 import React from "react";
+import { ReactSession } from "react-client-session";
 
 import Chest from "./Chest";
 import Images from "../constants/Images";
@@ -23,11 +24,15 @@ const Cell = (props) => {
   const { north, south, east, west, inside, noise, enemyPortal } = cell;
   const floor = inside ? Images.floorWood : Images.floorRocks;
 
+  const currentPlayer = characters.find(
+    (character) => character.userId === ReactSession.get("id")
+  );
+
   const canOpenDoor = (door) => {
     return (
       zoomedMap > -1 &&
-      // players[gameData.currentPlayer].minimap === minimapIndex &&
-      // players[gameData.currentPlayer].cell === cellIndex &&
+      currentPlayer.minimap === zoomedMap &&
+      currentPlayer.cell === cell.position &&
       door.closed
       // gameData.generalActions + gameData.sceneryActions > 0
     );

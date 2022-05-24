@@ -24,6 +24,7 @@ const Map = (props) => {
   if (zoomedMap > -1) {
     const minimap = minimaps.find((minimap) => minimap.position === zoomedMap);
 
+    console.log(gameData);
     return (
       <div style={styles.container}>
         <div style={styles.smallContainer}>
@@ -32,7 +33,7 @@ const Map = (props) => {
         <div style={styles.asideBar}>
           <div style={styles.gameData}>
             <span>Round: {gameData.round}</span>
-            <span>Jogador atual: {gameData.currentPlayer}</span>
+            <span>Jogador atual: {gameData.roundOrder[0]}</span>
             <span>Açoes gerais: {gameData.generalActions}</span>
             <span>Ações de movimento: {gameData.moveActions}</span>
             <span>Açoes de ataque: {gameData.atackActions}</span>
