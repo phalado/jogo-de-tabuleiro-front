@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Map from "../containers/Map";
-import EndGameButton from "./EndGameButton";
+import Menu from "./Menu";
 
 import Images from "../constants/Images";
 import {
@@ -23,6 +23,8 @@ const App = (props) => {
     setCharacters,
   } = props;
 
+  const [repeater, setRepeater] = useState(0);
+
   useEffect(() => {
     const setStateAfterRequest = (data) => {
       setDoors(data.doors);
@@ -32,10 +34,17 @@ const App = (props) => {
       setMinimaps(data.minimaps);
     };
 
+    const callUpdateService = () => {
+      const service = requestGameData();
+      service.then((answer) => setStateAfterRequest(answer.data));
+    };
+
+    callUpdateService();
+
     //   closeModal();
-    const service = requestGameData();
-    service.then((answer) => setStateAfterRequest(answer.data));
-  }, [setChests, setDoors, setMinimaps, setGameData, setCharacters]);
+    // const interval = setInterval(() => callUpdateService, 1000);
+    setTimeout(() => setRepeater((prevState) => prevState + 1), 2000);
+  }, [setChests, setDoors, setMinimaps, setGameData, setCharacters, repeater]);
 
   const createGame = () => {
     const service = createNewGame("01");
@@ -116,7 +125,7 @@ const App = (props) => {
       <Map />
       {/* <CharacterModal />
       <AtackModal /> */}
-      <EndGameButton gameData={gameData} setMinimaps={setMinimaps} />
+      <Menu gameData={gameData} setMinimaps={setMinimaps} />
     </div>
   );
 };

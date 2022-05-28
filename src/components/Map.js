@@ -24,7 +24,6 @@ const Map = (props) => {
   if (zoomedMap > -1) {
     const minimap = minimaps.find((minimap) => minimap.position === zoomedMap);
 
-    console.log(gameData);
     return (
       <div style={styles.container}>
         <div style={styles.smallContainer}>

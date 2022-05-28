@@ -17,6 +17,7 @@ const Routing = (props) => {
     ReactSession.set("id", id);
     ReactSession.set("username", username);
     ReactSession.set("email", email);
+    ReactSession.set("gotData", true);
   };
 
   useEffect(() => {
@@ -25,11 +26,13 @@ const Routing = (props) => {
       setSession(data);
     };
 
-    const current_user_id = ReactSession.get("id");
+    if (!ReactSession.get("gotData")) {
+      const current_user_id = ReactSession.get("id");
 
-    if (current_user_id !== undefined && current_user_id !== 0) {
-      const service = requestUserData();
-      service.then((answer) => setStateAfterRequest(answer.data));
+      if (current_user_id !== undefined && current_user_id !== 0) {
+        const service = requestUserData(current_user_id);
+        service.then((answer) => setStateAfterRequest(answer.data));
+      }
     }
   }, [setCurrentUser, currentUser]);
 
