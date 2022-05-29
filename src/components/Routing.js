@@ -93,8 +93,8 @@ const Routing = (props) => {
     createNewUser(email, password, username).then((answer) => {
       setCurrentUser(answer.data);
       setSession(answer.data);
+      setRenderState("start");
     });
-    setRenderState("start");
   };
 
   const createGame = () => {

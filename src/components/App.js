@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ReactSession } from "react-client-session";
 
 import Map from "../containers/Map";
 import Menu from "./Menu";
@@ -31,14 +32,12 @@ const App = (props) => {
     };
 
     const callUpdateService = () => {
-      const service = requestGameData(gameData.gameId);
+      const service = requestGameData(ReactSession.get("gameId"));
       service.then((answer) => setStateAfterRequest(answer.data));
     };
 
     callUpdateService();
 
-    //   closeModal();
-    // const interval = setInterval(() => callUpdateService, 1000);
     setTimeout(() => setRepeater((prevState) => prevState + 1), 1000);
   }, [setChests, setDoors, setMinimaps, setGameData, setCharacters, repeater]);
 

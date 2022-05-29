@@ -31,6 +31,8 @@ const Menu = (props) => {
       ReactSession.remove("username");
       ReactSession.remove("email");
       ReactSession.remove("gotData");
+      ReactSession.remove("gameId");
+      ReactSession.remove("render");
     }
 
     return null;

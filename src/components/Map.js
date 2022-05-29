@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import MiniMap from "./MiniMap";
 import ActionSubMenu from "../containers/ActionSubMenu";
@@ -49,6 +50,8 @@ const Map = (props) => {
   }
 
   return (
+    // <TransformWrapper>
+    // <TransformComponent>
     <div style={styles.container}>
       {minimaps
         .sort((a, b) => a.position - b.position)
@@ -67,6 +70,8 @@ const Map = (props) => {
           );
         })}
     </div>
+    //   </TransformComponent>
+    // </TransformWrapper>
   );
 };
 

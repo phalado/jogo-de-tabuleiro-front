@@ -8,6 +8,7 @@ const headers = {
 };
 
 const currentUserId = () => ReactSession.get("id");
+const gameId = () => ReactSession.get("gameId");
 
 const requestUserData = async (user_id) => {
   const baseUrl = ApiStr.API_URL + "/users/" + user_id;
@@ -74,21 +75,26 @@ const gameStart = async (gameId) => {
 
 const moveCharacter = async (type, direction) => {
   const baseUrl = ApiStr.API_URL + "/characters/move_character";
-  const params = { id: currentUserId(), character_type: type, direction };
+  const params = {
+    id: currentUserId(),
+    game_id: gameId(),
+    character_type: type,
+    direction,
+  };
 
   return axios.post(baseUrl, params, { headers });
 };
 
 const openDoor = async (doorName, silent) => {
   const baseUrl = ApiStr.API_URL + "/actions/open_door";
-  const params = { id: currentUserId(), door_name: doorName, silent };
+  const params = { game_id: gameId(), door_name: doorName, silent };
 
   return axios.post(baseUrl, params, { headers });
 };
 
 const openChest = async (chestName, silent) => {
   const baseUrl = ApiStr.API_URL + "/actions/open_chest";
-  const params = { id: currentUserId(), chest_name: chestName, silent };
+  const params = { game_id: gameId(), chest_name: chestName, silent };
 
   return axios.post(baseUrl, params, { headers });
 };
