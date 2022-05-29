@@ -68,6 +68,9 @@ const AppStyles = {
   newGameButton: {
     height: "10%",
   },
+  title: {
+    margin: 0,
+  },
 };
 
 export default AppStyles;

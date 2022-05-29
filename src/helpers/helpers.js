@@ -47,6 +47,15 @@ const topNoisyCells = (cells) => {
   return noisyCells.filter((cell) => cell.noise === noisyCells[0].noise);
 };
 
+const charactersArray = [
+  ["archer", "Arqueiro"],
+  ["mage", "Mago"],
+  ["human", "Humano"],
+  ["elf", "Elfo"],
+  ["thief", "Ladrão"],
+  ["dwarf", "Anão"],
+];
+
 // const bestRoute = (props) => {
 //   const { minimapIndex, cellIndex, cell, doors, minimaps, noisyCell, path } =
 //     props;
@@ -132,6 +141,7 @@ export {
   randomElement,
   lastMove,
   topNoisyCells,
+  charactersArray,
   // enemyBestRoute,
   // randomMovement,
 };

@@ -1,7 +1,6 @@
 import React from "react";
 
 import Images from "../constants/Images";
-import { openChest } from "../services/ApiServices";
 
 import styles from "../styles/Chest";
 

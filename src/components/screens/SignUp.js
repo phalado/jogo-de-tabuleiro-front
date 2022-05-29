@@ -1,9 +1,17 @@
 import React from "react";
 
-import styles from "../styles/Login";
+import styles from "../../styles/Login";
 
 const SignUp = (props) => {
-  const { changeToLogin } = props;
+  const { changeToLogin, signup } = props;
+
+  const signupHandler = () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
+
+    signup(email, password, username);
+  };
 
   return (
     <div style={styles.loginContainer}>
@@ -48,7 +56,7 @@ const SignUp = (props) => {
           />
         </div>
         <div>
-          <input type="submit" value="Entrar" />
+          <input type="submit" value="Entrar" onClick={() => signupHandler()} />
         </div>
         <div style={styles.signUpLink}>
           <button onClick={() => changeToLogin()}>Já tem conta? Entre.</button>

@@ -1,18 +1,17 @@
 import { connect } from "react-redux";
 
 import Cell from "../components/Cell";
-import { setChests, setDoors } from "../actions";
+import { setChests } from "../actions";
 
 const mapStateToProps = (state) => ({
-  chests: state.chests,
   doors: state.doors,
+  chests: state.chests,
   gameData: state.gameData,
   zoomedMap: state.zoomedMap,
   characters: state.characters,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setDoors: (doors) => dispatch(setDoors(doors)),
   setChests: (doors) => dispatch(setChests(doors)),
 });
 

@@ -20,7 +20,7 @@ const Menu = (props) => {
 
   const changeGameStatus = () => {
     if (window.confirm("Tem certeza que deseja finalizar este jogo?"))
-      endGame(gameData.gameId).then((answer) => setMinimaps([]));
+      endGame(gameData.gameId).then(() => setMinimaps([]));
 
     return null;
   };
@@ -42,6 +42,7 @@ const Menu = (props) => {
         src={Images.menuIcon}
         style={styles.menuIcon}
         onClick={() => showMenu()}
+        alt="Menu icon"
       />
       <div style={dropdownStyle}>
         <button

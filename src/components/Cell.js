@@ -14,10 +14,10 @@ const Cell = (props) => {
     cell,
     minimapPosition,
     doors,
-    zoomedMap,
     chests,
+    gameData,
+    zoomedMap,
     characters,
-    setDoors,
     setChests,
   } = props;
 
@@ -32,15 +32,16 @@ const Cell = (props) => {
     return (
       zoomedMap > -1 &&
       currentPlayer.minimap === zoomedMap &&
-      currentPlayer.cell === cell.position &&
-      door.closed
-      // gameData.generalActions + gameData.sceneryActions > 0
+      door.closed &&
+      gameData.generalActions + gameData.sceneryActions > 0 &&
+      (currentPlayer.cell === door.cell1["cell"] ||
+        currentPlayer.cell === door.cell2["cell"])
     );
   };
 
   const changeThisDoorState = (door) => {
     if (canOpenDoor(door)) {
-      openDoor(door.name, false).then((answer) => setDoors(answer.data));
+      openDoor(door.name, false);
       // addSoundToCell({
       //   minimap: players[gameData.currentPlayer].minimap,
       //   cell: players[gameData.currentPlayer].cell,

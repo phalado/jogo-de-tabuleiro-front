@@ -49,6 +49,11 @@ const setCurrentUser = (currentUser) => ({
   currentUser,
 });
 
+const setRender = (render) => ({
+  type: "SET_RENDER",
+  render,
+});
+
 // const openModal = (data) => ({
 //   type: "OPEN_MODAL",
 //   heroCharacter: data.heroCharacter,
@@ -82,5 +87,6 @@ export {
   changeZoomedMap,
   charactersInitialState,
   setCharacters,
-  setCurrentUser
+  setCurrentUser,
+  setRender,
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "../styles/Login";
+import styles from "../../styles/Login";
 
 const Login = (props) => {
   const { changeToSignUp, login } = props;

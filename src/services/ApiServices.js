@@ -23,9 +23,16 @@ const loginUser = async (email, password) => {
   return axios.post(baseUrl, params, { headers });
 };
 
-const requestGameData = async () => {
+const createNewUser = async (email, password, username) => {
+  const baseUrl = ApiStr.API_URL + "/users";
+  const params = { email, password, username };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
+const requestGameData = async (gameId) => {
   const baseUrl = ApiStr.API_URL + "/games/game_data";
-  const params = { id: currentUserId() };
+  const params = { id: currentUserId(), game_id: gameId };
 
   return axios.post(baseUrl, params, { headers });
 };
@@ -37,9 +44,30 @@ const createNewGame = async (gameMode) => {
   return axios.post(baseUrl, params, { headers });
 };
 
-const createCharacter = async (type) => {
+const joinCreatedGame = async (gameId) => {
+  const baseUrl = ApiStr.API_URL + "/games/join_game";
+  const params = { id: currentUserId(), game_id: gameId };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
+const createCharacter = async (gameId, type) => {
   const baseUrl = ApiStr.API_URL + "/characters";
-  const params = { id: currentUserId(), character_type: type };
+  const params = { id: currentUserId(), character_type: type, game_id: gameId };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
+const gamesCharacter = async (gameId) => {
+  const baseUrl = ApiStr.API_URL + "/characters/games_character";
+  const params = { id: currentUserId(), game_id: gameId };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
+const gameStart = async (gameId) => {
+  const baseUrl = ApiStr.API_URL + "/games/start_game";
+  const params = { id: currentUserId(), game_id: gameId };
 
   return axios.post(baseUrl, params, { headers });
 };
@@ -82,4 +110,8 @@ export {
   moveCharacter,
   requestUserData,
   loginUser,
+  createNewUser,
+  joinCreatedGame,
+  gamesCharacter,
+  gameStart,
 };

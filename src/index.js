@@ -10,6 +10,8 @@ import "./index.css";
 
 import { ReactSession } from "react-client-session";
 
+ReactSession.setStoreType("sessionStorage");
+
 let initialState = {
   chests: [],
   doors: [],
@@ -24,6 +26,7 @@ let initialState = {
     expires_at: null,
     token: null,
   },
+  render: ReactSession.get("render") || "login",
 };
 
 const store = createStore(
