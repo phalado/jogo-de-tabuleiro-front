@@ -1,7 +1,6 @@
 const CellStyles = {
   container: {
     width: "33.333%",
-    height: "33.333%",
     position: "relative",
   },
   wholeImage: {
@@ -132,12 +131,12 @@ const CellStyles = {
     display: "flex",
   },
   soundIcon: {
-    width: '10%',
-    height: '10%',
-    position: 'absolute',
-    right: '-15px',
-    top: '-15px',
-  }
+    width: "10%",
+    height: "10%",
+    position: "absolute",
+    right: "-5px",
+    top: "-5px",
+  },
 };
 
 export default CellStyles;

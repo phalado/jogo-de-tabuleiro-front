@@ -7,7 +7,6 @@ const mapStateToProps = (state) => ({
   doors: state.doors,
   chests: state.chests,
   gameData: state.gameData,
-  zoomedMap: state.zoomedMap,
   characters: state.characters,
 });
 

@@ -1,11 +1,12 @@
 const MapStyles = {
   container: {
-    width: "80%",
-    height: "80%",
+    width: "100%",
+    height: "100%",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
     display: "flex",
+    marginLeft: "2%",
   },
   smallContainer: {
     width: "80%",
@@ -21,13 +22,6 @@ const MapStyles = {
     flexDirection: "row",
     flexWrap: "wrap",
     display: "flex",
-  },
-  asideBar: {
-    width: "15%",
-    height: "100%",
-    marginLeft: "5%",
-    backgroundColor: "white",
-    zIndex: 1,
   },
   button: {
     width: "90%",
@@ -84,15 +78,6 @@ const MapStyles = {
   ewArrow: {
     width: "80%",
     height: "50%",
-  },
-  gameData: {
-    width: "90%",
-    height: "36%",
-    margin: "5%",
-    textAlign: "center",
-    justifyContent: "space-between",
-    flexDirection: "column",
-    display: "flex",
   },
 };
 

@@ -1,7 +1,7 @@
 const EndGameButtonStyles = {
   menuIcon: {
-    width: "5%",
-    height: "5%",
+    width: "40px",
+    height: "40px",
     position: "absolute",
     top: "2%",
     right: "2%",
@@ -13,6 +13,7 @@ const EndGameButtonStyles = {
     right: "2%",
     backgroundColor: "white",
     display: "none",
+    zIndex: 2,
   },
   dropdownButton: {
     width: "100%",

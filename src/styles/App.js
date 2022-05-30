@@ -19,13 +19,6 @@ const AppStyles = {
     justifyContent: "center",
     display: "flex",
   },
-  // buttonContainer: {
-  //   flexDirection: "row",
-  //   height: "30%",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   display: "flex",
-  // },
   chooseContainer: {
     width: "80%",
     height: "50%",
@@ -70,6 +63,23 @@ const AppStyles = {
   },
   title: {
     margin: 0,
+  },
+  asideBar: {
+    width: "15%",
+    height: "80%",
+    marginLeft: "2%",
+    marginRight: "2%",
+    backgroundColor: "white",
+    zIndex: 1,
+  },
+  gameData: {
+    width: "90%",
+    height: "36%",
+    margin: "5%",
+    textAlign: "center",
+    justifyContent: "space-between",
+    flexDirection: "column",
+    display: "flex",
   },
 };
 

@@ -1,12 +1,13 @@
 const LoginStyles = {
   loginContainer: {
     height: "100%",
+    display: "flex",
   },
   formContainer: {
     width: "50%",
     height: "50%",
     backgroundColor: "lightgray",
-    margin: "25%",
+    margin: "auto",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",

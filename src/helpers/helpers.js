@@ -35,26 +35,10 @@ const possibleMoves = (minimap, cell, doors) => {
 const randomElement = (array) =>
   array[Math.floor(Math.random() * array.length)];
 
-const lastMove = (gameData) => {
-  const { generalActions, moveActions, atackActions, sceneryActions } =
-    gameData;
-
-  return generalActions + moveActions + atackActions + sceneryActions === 0;
-};
-
 const topNoisyCells = (cells) => {
   const noisyCells = cells.sort((a, b) => b.noise - a.noise);
   return noisyCells.filter((cell) => cell.noise === noisyCells[0].noise);
 };
-
-const charactersArray = [
-  ["archer", "Arqueiro"],
-  ["mage", "Mago"],
-  ["human", "Humano"],
-  ["elf", "Elfo"],
-  ["thief", "Ladrão"],
-  ["dwarf", "Anão"],
-];
 
 // const bestRoute = (props) => {
 //   const { minimapIndex, cellIndex, cell, doors, minimaps, noisyCell, path } =
@@ -139,9 +123,7 @@ const charactersArray = [
 export {
   possibleMoves,
   randomElement,
-  lastMove,
   topNoisyCells,
-  charactersArray,
   // enemyBestRoute,
   // randomMovement,
 };

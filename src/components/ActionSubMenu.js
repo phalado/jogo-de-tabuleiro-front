@@ -3,7 +3,6 @@ import { ReactSession } from "react-client-session";
 
 import {
   // enemyBestRoute,
-  lastMove,
   // movementDestiny,
   possibleMoves,
   // randomElement,
@@ -20,27 +19,34 @@ import {
 import Images from "../constants/Images";
 
 import styles from "../styles/Map";
-import { moveCharacter, openChest } from "../services/ApiServices";
+import {
+  moveCharacter,
+  openChest,
+  changePlayer,
+} from "../services/ApiServices";
 
 const ActionSubMenu = (props) => {
   const {
     minimaps,
     doors,
-    zoomedMap,
     gameData,
     chests,
     action,
     setAction,
     characters,
-    changeZoomedMap,
     setCharacters,
     setChests,
   } = props;
 
+  if (gameData.currentUserId !== ReactSession.get("id")) return null;
+
   const currentPlayer = characters.find(
     (character) => character.userId === ReactSession.get("id")
   );
-  const minimap = minimaps.find((minimap) => minimap.position === zoomedMap);
+  console.log(currentPlayer, gameData);
+  const minimap = minimaps.find(
+    (minimap) => minimap.position === currentPlayer.minimap
+  );
 
   // const changePlayer = (setMenu) => {
   //   // setEnemiesOrder(Object.keys(enemies));
@@ -61,12 +67,14 @@ const ActionSubMenu = (props) => {
   // };
 
   const movePin = (direction) => {
+    if (gameData.moveActions + gameData.generalActions <= 0) return null;
+
     moveCharacter(currentPlayer.characterType, direction).then((answer) => {
       setCharacters(answer.data);
-      const user = answer.data.find(
-        (character) => character.userId === ReactSession.get("id")
-      );
-      changeZoomedMap(user.minimap);
+      // const user = answer.data.find(
+      //   (character) => character.userId === ReactSession.get("id")
+      // );
+      // changeZoomedMap(user.minimap);
     });
     // // changeMovementCount();
     // currentPlayer.move({
@@ -162,21 +170,17 @@ const ActionSubMenu = (props) => {
   // }
 
   if (action === "menu") {
-    if (lastMove(gameData)) {
-      // changePlayer(false);
-      return null;
-    }
-
     const chest = chests.find(
       (chest) =>
-        chest.minimap === zoomedMap && chest.cell === currentPlayer.cell
+        chest.minimap === currentPlayer.minimap &&
+        chest.cell === currentPlayer.cell
     );
 
     const openChestButton = () => {
       if (
         chest &&
-        chest.closed
-        // gameData.sceneryActions + gameData.generalActions > 0
+        chest.closed &&
+        gameData.sceneryActions + gameData.generalActions > 0
       ) {
         return (
           <button
@@ -196,9 +200,11 @@ const ActionSubMenu = (props) => {
     return (
       <div style={styles.moveButtonsContainer}>
         {/* {atackButton()} */}
-        <button style={styles.button} onClick={() => setAction("move")}>
-          Mover
-        </button>
+        {gameData.moveActions + gameData.generalActions <= 0 ? null : (
+          <button style={styles.button} onClick={() => setAction("move")}>
+            Mover
+          </button>
+        )}
         <button style={styles.button} onClick={() => setAction("change")}>
           Trocar
         </button>
@@ -217,20 +223,20 @@ const ActionSubMenu = (props) => {
         >
           Defender
         </button> */}
-        {/* <button
+        <button
           style={styles.button}
           onClick={() => {
-            if (window.confirm("Encerrar jogada?")) changePlayer(true);
+            if (window.confirm("Encerrar jogada?")) changePlayer();
           }}
         >
           Encerrar ação
-        </button> */}
+        </button>
         {openChestButton()}
       </div>
     );
   }
 
-  if (currentPlayer.minimap === zoomedMap && action === "move") {
+  if (action === "move") {
     // if (gameData.generalActions + gameData.moveActions > 0) {
     const cell = minimap.cells.find(
       (cell) => cell.position === currentPlayer.cell
@@ -240,9 +246,9 @@ const ActionSubMenu = (props) => {
       cell,
       doors.filter(
         (door) =>
-          (door.cell1.minimap === zoomedMap &&
+          (door.cell1.minimap === currentPlayer.minimap &&
             door.cell1.cell === cell.position) ||
-          (door.cell2.minimap === zoomedMap &&
+          (door.cell2.minimap === currentPlayer.minimap &&
             door.cell2.cell === cell.position)
       )
     );

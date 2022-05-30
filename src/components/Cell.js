@@ -16,7 +16,6 @@ const Cell = (props) => {
     doors,
     chests,
     gameData,
-    zoomedMap,
     characters,
     setChests,
   } = props;
@@ -30,10 +29,9 @@ const Cell = (props) => {
 
   const canOpenDoor = (door) => {
     return (
-      zoomedMap > -1 &&
-      currentPlayer.minimap === zoomedMap &&
       door.closed &&
       gameData.generalActions + gameData.sceneryActions > 0 &&
+      gameData.currentUserId === ReactSession.get("id") &&
       (currentPlayer.cell === door.cell1["cell"] ||
         currentPlayer.cell === door.cell2["cell"])
     );

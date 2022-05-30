@@ -17,7 +17,6 @@ let initialState = {
   doors: [],
   gameData: { round: 0, open: false },
   minimaps: [],
-  zoomedMap: -1,
   characters: [],
   currentUser: {
     username: ReactSession.get("username"),

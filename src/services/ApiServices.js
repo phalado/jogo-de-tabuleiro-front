@@ -106,6 +106,13 @@ const endGame = async (game_id) => {
   return axios.get(baseUrl, params, { headers });
 };
 
+const changePlayer = async () => {
+  const baseUrl = ApiStr.API_URL + "/games/change_player";
+  const params = { id: currentUserId(), game_id: gameId() };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
 export {
   requestGameData,
   createNewGame,
@@ -120,4 +127,5 @@ export {
   joinCreatedGame,
   gamesCharacter,
   gameStart,
+  changePlayer,
 };

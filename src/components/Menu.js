@@ -19,8 +19,12 @@ const Menu = (props) => {
   };
 
   const changeGameStatus = () => {
-    if (window.confirm("Tem certeza que deseja finalizar este jogo?"))
+    if (window.confirm("Tem certeza que deseja finalizar este jogo?")) {
+      ReactSession.remove("gotData");
+      ReactSession.remove("gameId");
+      ReactSession.set("render", "start");
       endGame(gameData.gameId).then(() => setMinimaps([]));
+    }
 
     return null;
   };

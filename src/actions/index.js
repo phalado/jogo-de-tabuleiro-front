@@ -39,11 +39,6 @@ const setGameData = (data) => ({
   data,
 });
 
-const changeZoomedMap = (minimap) => ({
-  type: "CHANGE_ZOOMED_MAP",
-  minimap,
-});
-
 const setCurrentUser = (currentUser) => ({
   type: "SET_CURRENT_USER",
   currentUser,
@@ -84,7 +79,6 @@ export {
   doorsInitialState,
   setDoors,
   setGameData,
-  changeZoomedMap,
   charactersInitialState,
   setCharacters,
   setCurrentUser,
