@@ -6,6 +6,7 @@ import { setChests } from "../actions";
 const mapStateToProps = (state) => ({
   doors: state.doors,
   chests: state.chests,
+  enemies: state.enemies,
   gameData: state.gameData,
   characters: state.characters,
 });

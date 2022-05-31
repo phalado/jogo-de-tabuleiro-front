@@ -19,6 +19,7 @@ const App = (props) => {
     setDoors,
     setGameData,
     setCharacters,
+    setEnemies,
   } = props;
 
   const [repeater, setRepeater] = useState(0);
@@ -26,6 +27,8 @@ const App = (props) => {
 
   useEffect(() => {
     const setStateAfterRequest = (data) => {
+      console.log(data);
+      setEnemies(data.enemies);
       setCharacters(data.characters);
       setDoors(data.doors);
       setChests(data.chests);
@@ -40,7 +43,7 @@ const App = (props) => {
 
     callUpdateService();
 
-    setTimeout(() => setRepeater((prevState) => prevState + 1), 1000);
+    // setTimeout(() => setRepeater((prevState) => prevState + 1), 1000);
   }, [setChests, setDoors, setMinimaps, setGameData, setCharacters, repeater]);
 
   const SubMenu = () => {

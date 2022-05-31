@@ -7,6 +7,7 @@ import gameData from "./gameData";
 import characters from "./characters";
 import currentUser from "./currentUser";
 import render from "./render";
+import enemies from "./enemies";
 
 const rootReducer = combineReducers({
   minimaps,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   characters,
   currentUser,
   render,
+  enemies,
 });
 
 export default rootReducer;

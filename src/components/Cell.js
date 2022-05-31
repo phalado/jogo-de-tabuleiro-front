@@ -17,6 +17,7 @@ const Cell = (props) => {
     chests,
     gameData,
     characters,
+    enemies,
     setChests,
   } = props;
 
@@ -38,15 +39,7 @@ const Cell = (props) => {
   };
 
   const changeThisDoorState = (door) => {
-    if (canOpenDoor(door)) {
-      openDoor(door.name, false);
-      // addSoundToCell({
-      //   minimap: players[gameData.currentPlayer].minimap,
-      //   cell: players[gameData.currentPlayer].cell,
-      // });
-      // if (gameData.sceneryActions > 0) changeActionsCount("sceneryActions");
-      // else changeActionsCount("generalActions");
-    }
+    if (canOpenDoor(door)) openDoor(door.name, false);
     return null;
   };
 
@@ -88,7 +81,11 @@ const Cell = (props) => {
   );
 
   const cellCharacters = characters.filter(
-    (chest) => chest.minimap === minimapPosition && chest.cell === cell.position
+    (char) => char.minimap === minimapPosition && char.cell === cell.position
+  );
+
+  const cellEnemies = enemies.filter(
+    (enemy) => enemy.minimap === minimapPosition && enemy.cell === cell.position
   );
 
   const insideElements = () => {
@@ -117,30 +114,26 @@ const Cell = (props) => {
             </div>
           );
         })}
-        {/* {Object.entries(enemies).map(([key, value]) => {
-          if (value.minimap === minimapIndex && value.cell === cellIndex) {
-            return (
-              <div
-                style={chestStyles.container}
-                key={[key, value]}
-                onClick={() =>
-                  openModal({
-                    heroCharacter: false,
-                    character: value.enemyType,
-                  })
-                }
-              >
-                <img
-                  src={Images.enemy[value.enemyType]}
-                  style={chestStyles.pin}
-                  alt={value.enemyType}
-                />
-              </div>
-            );
-          }
-
-          return null;
-        })} */}
+        {cellEnemies.map((enemy) => {
+          return (
+            <div
+              style={chestStyles.container}
+              key={enemy}
+              // onClick={() =>
+              //   openModal({
+              //     heroCharacter: false,
+              //     character: value.enemyType,
+              //   })
+              // }
+            >
+              <img
+                src={Images.enemy[enemy.type]}
+                style={chestStyles.pin}
+                alt={enemy.type}
+              />
+            </div>
+          );
+        })}
         {soundIcon()}
         {enemyPortalImage()}
       </div>

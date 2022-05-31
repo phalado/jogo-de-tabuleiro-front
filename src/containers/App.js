@@ -5,6 +5,7 @@ import {
   setGameData,
   setMinimaps,
   setCharacters,
+  setEnemies,
 } from "../actions";
 
 import App from "../components/App";
@@ -19,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
   setDoors: (doors) => dispatch(setDoors(doors)),
   setGameData: (gameData) => dispatch(setGameData(gameData)),
   setCharacters: (characters) => dispatch(setCharacters(characters)),
+  setEnemies: (enemies) => dispatch(setEnemies(enemies)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

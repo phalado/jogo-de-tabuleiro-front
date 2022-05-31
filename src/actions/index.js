@@ -49,6 +49,11 @@ const setRender = (render) => ({
   render,
 });
 
+const setEnemies = (enemies) => ({
+  type: "SET_ENEMIES",
+  enemies,
+});
+
 // const openModal = (data) => ({
 //   type: "OPEN_MODAL",
 //   heroCharacter: data.heroCharacter,
@@ -83,4 +88,5 @@ export {
   setCharacters,
   setCurrentUser,
   setRender,
+  setEnemies
 };
