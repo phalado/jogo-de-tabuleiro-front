@@ -39,6 +39,7 @@ const CharacterChoose = (props) => {
       />
       <div style={styles.chooseContainer}>
         <h1 style={styles.title}>Escolha seu personagem</h1>
+        <h3 style={styles.title}>ID do jogo: {gameId}</h3>
         <div style={styles.chooseButtonContainer}>
           {Object.entries(characters).map(([type, object]) => (
             <div style={styles.characterContainer} key={[type, object]}>
