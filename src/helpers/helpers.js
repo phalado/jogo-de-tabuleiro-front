@@ -40,90 +40,15 @@ const topNoisyCells = (cells) => {
   return noisyCells.filter((cell) => cell.noise === noisyCells[0].noise);
 };
 
-// const bestRoute = (props) => {
-//   const { minimapIndex, cellIndex, cell, doors, minimaps, noisyCell, path } =
-//     props;
+const countEnemies = (enemiesArray) => {
+  let enemiesHash = {};
+  enemiesArray.forEach((enemy) => {
+    enemiesHash[enemy.type] = enemiesHash[enemy.type]
+      ? enemiesHash[enemy.type] + 1
+      : 1;
+  });
 
-//   if (
-//     path.some(
-//       (square) =>
-//         square.minimapIndex === minimapIndex && square.cellIndex === cellIndex
-//     )
-//   )
-//     return Infinity;
-//   if (cell.noise === noisyCell) return path.length + 1;
-
-//   const possibleMoves = movementHash(minimapIndex);
-//   const directions = ["north", "south", "east", "west"];
-//   let routeSize = Infinity;
-
-//   directions.forEach((direction) => {
-//     if (openDirection({ cell, direction, doors })) {
-//       routeSize = Math.min(
-//         routeSize,
-//         bestRoute({
-//           minimapIndex: possibleMoves[direction][cellIndex].minimap,
-//           cellIndex: possibleMoves[direction][cellIndex].cell,
-//           cell: minimaps[possibleMoves[direction][cellIndex].minimap][
-//             possibleMoves[direction][cellIndex].cell
-//           ],
-//           doors,
-//           minimaps,
-//           noisyCell,
-//           path: [...path, { minimapIndex, cellIndex }],
-//         })
-//       );
-//     }
-//   });
-
-//   return routeSize;
-// };
-
-// const enemyBestRoute = (props) => {
-//   const { minimapIndex, cellIndex, cell, doors, minimaps, noisyCell } = props;
-
-//   const possibleMoves = movementHash(minimapIndex);
-//   const directions = ["north", "south", "east", "west"];
-//   const routeSize = {};
-
-//   directions.forEach((direction) => {
-//     if (openDirection({ cell, direction, doors })) {
-//       routeSize[direction] = Math.min(
-//         Infinity,
-//         bestRoute({
-//           minimapIndex: possibleMoves[direction][cellIndex].minimap,
-//           cellIndex: possibleMoves[direction][cellIndex].cell,
-//           cell: minimaps[possibleMoves[direction][cellIndex].minimap][
-//             possibleMoves[direction][cellIndex].cell
-//           ],
-//           doors,
-//           minimaps,
-//           noisyCell,
-//           path: [{ minimapIndex, cellIndex }],
-//         })
-//       );
-//     }
-//   });
-
-//   const movementDirection = Object.entries(routeSize).sort(
-//     (a, b) => a[1] - b[1]
-//   )[0][0];
-
-//   return possibleMoves[movementDirection][cellIndex];
-// };
-
-// const randomMovement = props => {
-//   const { cell, doors, minimapIndex, cellIndex } = props;
-
-//   const movementDirection = randomElement(possibleMoves(cell, doors));
-
-//   return movementHash(minimapIndex)[movementDirection][cellIndex]
-// }
-
-export {
-  possibleMoves,
-  randomElement,
-  topNoisyCells,
-  // enemyBestRoute,
-  // randomMovement,
+  return enemiesHash;
 };
+
+export { possibleMoves, randomElement, topNoisyCells, countEnemies };

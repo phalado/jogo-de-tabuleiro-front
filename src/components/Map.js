@@ -22,6 +22,7 @@ const Map = (props) => {
                   <MiniMap
                     minimapPosition={minimap.position}
                     cells={minimap.cells}
+                    key={minimap}
                   />
                 </div>
               );

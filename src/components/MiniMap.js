@@ -16,7 +16,7 @@ const MiniMap = (props) => {
             <Cell
               cell={cell}
               minimapPosition={minimapPosition}
-              key={[cell, cell.position]}
+              key={[cell, minimapPosition, cell.position]}
             />
           );
         })}

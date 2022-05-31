@@ -1,14 +1,7 @@
 import React from "react";
 import { ReactSession } from "react-client-session";
 
-import {
-  // enemyBestRoute,
-  // movementDestiny,
-  possibleMoves,
-  // randomElement,
-  // randomMovement,
-  // topNoisyCells,
-} from "../helpers/helpers";
+import { possibleMoves } from "../helpers/helpers";
 
 // import {
 //   enemiesOnRange,
@@ -43,45 +36,17 @@ const ActionSubMenu = (props) => {
   const currentPlayer = characters.find(
     (character) => character.userId === ReactSession.get("id")
   );
-  console.log(currentPlayer, gameData);
+
   const minimap = minimaps.find(
     (minimap) => minimap.position === currentPlayer.minimap
   );
-
-  // const changePlayer = (setMenu) => {
-  //   // setEnemiesOrder(Object.keys(enemies));
-  //   // setAction("enemy");
-  //   if (gameData.roundOrder.length > 1) {
-  //     changeCurrentPlayer();
-  //     renewGameActions([4, 0, 0, 0], players);
-  //     if (setMenu) setAction("menu");
-  //   } else {
-  //     setEnemiesOrder(Object.keys(enemies));
-  //     setAction("enemy");
-  //   }
-  // };
-
-  // const changeMovementCount = () => {
-  //   if (gameData.moveActions > 0) changeActionsCount("moveActions");
-  //   else changeActionsCount("generalActions");
-  // };
 
   const movePin = (direction) => {
     if (gameData.moveActions + gameData.generalActions <= 0) return null;
 
     moveCharacter(currentPlayer.characterType, direction).then((answer) => {
       setCharacters(answer.data);
-      // const user = answer.data.find(
-      //   (character) => character.userId === ReactSession.get("id")
-      // );
-      // changeZoomedMap(user.minimap);
     });
-    // // changeMovementCount();
-    // currentPlayer.move({
-    //   player: currentPlayer,
-    //   minimap,
-    //   cell,
-    // });
     setAction("menu");
   };
 
@@ -123,51 +88,6 @@ const ActionSubMenu = (props) => {
 
   if (action === "change")
     return <div style={styles.moveButtonsContainer}>{returnButton()}</div>;
-
-  // if (action === "enemy") {
-  //   const { enemyOrder } = gameData;
-  //   if (enemyOrder.length > 0) {
-  //     const enemy = enemies[enemyOrder[0]];
-  //     const playersToAtack = playersOnRange({ players, enemy });
-  //     if (playersToAtack.length > 0) {
-  //       openAtackModal({
-  //         isOpen: true,
-  //         atacker: enemy.id,
-  //         defender: randomElement(playersToAtack).playerType,
-  //         isPlayer: false,
-  //       });
-  //     } else {
-  //       const maxNoise = topNoisyCells([].concat(...GameMode01.minimaps))[0]
-  //         .noise;
-  //       let movement = {};
-
-  //       if (maxNoise === 0) {
-  //         movement = randomMovement({
-  //           cell: minimaps[0][enemy.cell],
-  //           doors,
-  //           minimapIndex: enemy.minimap,
-  //           cellIndex: enemy.cell,
-  //         });
-  //       } else {
-  //         movement = enemyBestRoute({
-  //           minimapIndex: enemy.minimap,
-  //           cellIndex: enemy.cell,
-  //           cell: minimaps[0][enemy.cell],
-  //           doors,
-  //           minimaps: GameMode01["minimaps"],
-  //           noisyCell: maxNoise,
-  //         });
-  //       }
-  //       enemy.move({ enemy, minimap: movement.minimap, cell: movement.cell });
-  //       enemyOrder.shift();
-  //       setEnemiesOrder(enemyOrder);
-  //     }
-  //   } else {
-  //     newRound();
-  //     resetSounds();
-  //     setAction("menu");
-  //   }
-  // }
 
   if (action === "menu") {
     const chest = chests.find(
@@ -318,9 +238,6 @@ const ActionSubMenu = (props) => {
         {returnButton()}
       </div>
     );
-    // }
-
-    // return <div style={styles.moveButtonsContainer}>{returnButton()}</div>;
   }
 
   return null;

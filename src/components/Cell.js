@@ -3,11 +3,12 @@ import { ReactSession } from "react-client-session";
 
 import Chest from "./Chest";
 import Images from "../constants/Images";
-import styles from "../styles/Cell";
 import chestStyles from "../styles/Chest";
 
+import styles from "../styles/Cell";
 import wall from "../helpers/cellHelpers";
 import { openDoor } from "../services/ApiServices";
+import { countEnemies } from "../helpers/helpers";
 
 const Cell = (props) => {
   const {
@@ -46,13 +47,8 @@ const Cell = (props) => {
   const soundIcon = () => {
     if (noise > 0) {
       return (
-        <div style={styles.soundIcon}>
-          <img
-            src={Images.soundIcon}
-            style={chestStyles.pin}
-            alt={noise}
-            title={noise}
-          />
+        <div style={styles.soundIcon} title={noise}>
+          <img src={Images.soundIcon} style={chestStyles.pin} alt={noise} />
         </div>
       );
     }
@@ -84,8 +80,11 @@ const Cell = (props) => {
     (char) => char.minimap === minimapPosition && char.cell === cell.position
   );
 
-  const cellEnemies = enemies.filter(
-    (enemy) => enemy.minimap === minimapPosition && enemy.cell === cell.position
+  const cellEnemies = countEnemies(
+    enemies.filter(
+      (enemy) =>
+        enemy.minimap === minimapPosition && enemy.cell === cell.position
+    )
   );
 
   const insideElements = () => {
@@ -103,7 +102,7 @@ const Cell = (props) => {
           return (
             <div
               style={chestStyles.container}
-              key={character}
+              key={[character.characterType, cell.position]}
               // onClick={() => openModal({ heroCharacter: true, character: key })}
             >
               <img
@@ -114,11 +113,12 @@ const Cell = (props) => {
             </div>
           );
         })}
-        {cellEnemies.map((enemy) => {
+        {Object.entries(cellEnemies).map(([key, value]) => {
           return (
             <div
               style={chestStyles.container}
-              key={enemy}
+              title={value}
+              key={[key, value, cell.position]}
               // onClick={() =>
               //   openModal({
               //     heroCharacter: false,
@@ -126,11 +126,7 @@ const Cell = (props) => {
               //   })
               // }
             >
-              <img
-                src={Images.enemy[enemy.type]}
-                style={chestStyles.pin}
-                alt={enemy.type}
-              />
+              <img src={Images.enemy[key]} style={chestStyles.pin} alt={key} />
             </div>
           );
         })}

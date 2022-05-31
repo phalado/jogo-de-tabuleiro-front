@@ -27,7 +27,6 @@ const App = (props) => {
 
   useEffect(() => {
     const setStateAfterRequest = (data) => {
-      console.log(data);
       setEnemies(data.enemies);
       setCharacters(data.characters);
       setDoors(data.doors);
