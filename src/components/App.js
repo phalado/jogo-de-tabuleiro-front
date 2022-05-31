@@ -43,7 +43,7 @@ const App = (props) => {
 
     callUpdateService();
 
-    // setTimeout(() => setRepeater((prevState) => prevState + 1), 1000);
+    setTimeout(() => setRepeater((prevState) => prevState + 1), 1000);
   }, [setChests, setDoors, setMinimaps, setGameData, setCharacters, repeater]);
 
   const SubMenu = () => {
