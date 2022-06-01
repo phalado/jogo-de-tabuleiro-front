@@ -26,6 +26,7 @@ let initialState = {
     token: null,
   },
   render: ReactSession.get("render") || "login",
+  characterModal: { isOpen: false },
 };
 
 const store = createStore(

@@ -8,7 +8,7 @@ import ActionSubMenu from "../containers/ActionSubMenu";
 import Images from "../constants/Images";
 import { requestGameData } from "../services/ApiServices";
 import styles from "../styles/App";
-// import CharacterModal from "../containers/CharacterModal";
+import CharacterModal from "../containers/CharacterModal";
 // import AtackModal from "../containers/AtackModal";
 
 const App = (props) => {
@@ -72,8 +72,8 @@ const App = (props) => {
         alt="Background random img"
       />
       <Map />
-      {/* <CharacterModal />
-      <AtackModal /> */}
+      <CharacterModal />
+      {/* <AtackModal /> */}
       {SubMenu()}
       <Menu gameData={gameData} setMinimaps={setMinimaps} />
     </div>

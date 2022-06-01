@@ -8,6 +8,7 @@ import characters from "./characters";
 import currentUser from "./currentUser";
 import render from "./render";
 import enemies from "./enemies";
+import characterModal from "./characterModal";
 
 const rootReducer = combineReducers({
   minimaps,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   currentUser,
   render,
   enemies,
+  characterModal,
 });
 
 export default rootReducer;

@@ -54,15 +54,15 @@ const setEnemies = (enemies) => ({
   enemies,
 });
 
-// const openModal = (data) => ({
-//   type: "OPEN_MODAL",
-//   heroCharacter: data.heroCharacter,
-//   character: data.character,
-// });
+const openModal = (data) => ({
+  type: "OPEN_MODAL",
+  heroCharacter: data.heroCharacter,
+  character: data.character,
+});
 
-// const closeModal = () => ({
-//   type: "CLOSE_MODAL",
-// });
+const closeModal = () => ({
+  type: "CLOSE_MODAL",
+});
 
 // const openAtackModal = (data) => ({
 //   type: "OPEN_ATACK_MODAL",
@@ -88,5 +88,7 @@ export {
   setCharacters,
   setCurrentUser,
   setRender,
-  setEnemies
+  setEnemies,
+  openModal,
+  closeModal,
 };

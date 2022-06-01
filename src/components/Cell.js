@@ -20,6 +20,7 @@ const Cell = (props) => {
     characters,
     enemies,
     setChests,
+    openModal,
   } = props;
 
   const { north, south, east, west, inside, noise, enemyPortal } = cell;
@@ -103,7 +104,12 @@ const Cell = (props) => {
             <div
               style={chestStyles.container}
               key={[character.characterType, cell.position]}
-              // onClick={() => openModal({ heroCharacter: true, character: key })}
+              onClick={() =>
+                openModal({
+                  heroCharacter: true,
+                  character: character.characterType,
+                })
+              }
             >
               <img
                 src={Images.player[character.characterType]}
@@ -119,12 +125,9 @@ const Cell = (props) => {
               style={chestStyles.container}
               title={value}
               key={[key, value, cell.position]}
-              // onClick={() =>
-              //   openModal({
-              //     heroCharacter: false,
-              //     character: value.enemyType,
-              //   })
-              // }
+              onClick={() =>
+                openModal({ heroCharacter: false, character: key })
+              }
             >
               <img src={Images.enemy[key]} style={chestStyles.pin} alt={key} />
             </div>
