@@ -64,17 +64,17 @@ const closeModal = () => ({
   type: "CLOSE_MODAL",
 });
 
-// const openAtackModal = (data) => ({
-//   type: "OPEN_ATACK_MODAL",
-//   isOpen: data.isOpen,
-//   atacker: data.atacker,
-//   defender: data.defender,
-//   isPlayer: data.isPlayer,
-// });
+const openAtackModal = (data) => ({
+  type: "OPEN_ATACK_MODAL",
+  isOpen: data.isOpen,
+  atacker: data.atacker,
+  defender: data.defender,
+  isPlayer: data.isPlayer,
+});
 
-// const closeAtackModal = () => ({
-//   type: "CLOSE_ATACK_MODAL",
-// });
+const closeAtackModal = () => ({
+  type: "CLOSE_ATACK_MODAL",
+});
 
 export {
   minimapsInitialState,
@@ -91,4 +91,6 @@ export {
   setEnemies,
   openModal,
   closeModal,
+  openAtackModal,
+  closeAtackModal,
 };

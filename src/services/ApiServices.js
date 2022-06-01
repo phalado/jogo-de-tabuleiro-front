@@ -113,6 +113,24 @@ const changePlayer = async () => {
   return axios.post(baseUrl, params, { headers });
 };
 
+const hitEnemy = async (characterType, enemyId) => {
+  const baseUrl = ApiStr.API_URL + "/characters/hit_enemy";
+  const params = {
+    game_id: gameId(),
+    character_type: characterType,
+    enemy_id: enemyId,
+  };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
+const missEnemy = async (characterType) => {
+  const baseUrl = ApiStr.API_URL + "/characters/miss_enemy";
+  const params = { game_id: gameId(), character_type: characterType };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
 export {
   requestGameData,
   createNewGame,
@@ -128,4 +146,6 @@ export {
   gamesCharacter,
   gameStart,
   changePlayer,
+  hitEnemy,
+  missEnemy,
 };

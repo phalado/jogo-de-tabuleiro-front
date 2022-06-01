@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactSession } from "react-client-session";
 
 import { possibleMoves } from "../helpers/helpers";
 
-// import {
-//   enemiesOnRange,
-//   enemyToAtack,
-//   playersOnRange,
-// } from "../helpers/atackHelpers";
+import {
+  enemiesOnRange,
+  enemyToAtack,
+  // playersOnRange,
+} from "../helpers/atackHelpers";
 
 import Images from "../constants/Images";
 
@@ -25,13 +25,17 @@ const ActionSubMenu = (props) => {
     gameData,
     chests,
     action,
+    enemies,
     setAction,
     characters,
     setCharacters,
     setChests,
+    openAtackModal,
   } = props;
 
   if (gameData.currentUserId !== ReactSession.get("id")) return null;
+
+  const [cellEnemies, setCellEnemies] = useState(enemies);
 
   const currentPlayer = characters.find(
     (character) => character.userId === ReactSession.get("id")
@@ -50,21 +54,27 @@ const ActionSubMenu = (props) => {
     setAction("menu");
   };
 
-  // const atackButton = () => {
-  //   const enemiesOnRangeArray = enemiesOnRange({
-  //     enemies,
-  //     player: players[gameData.currentPlayer],
-  //   });
-  //   if (enemiesOnRangeArray.length > 0) {
-  //     return (
-  //       <button style={styles.button} onClick={() => setAction("atack")}>
-  //         Ataque
-  //       </button>
-  //     );
-  //   }
+  const atackButton = () => {
+    if (
+      Object.keys(cellEnemies).length === 0 ||
+      gameData.atackActions + gameData.generalActions <= 0
+    )
+      return null;
 
-  //   return null;
-  // };
+    const enemiesOnRangeArray = enemiesOnRange({
+      enemies: cellEnemies,
+      currentPlayer,
+    });
+    if (enemiesOnRangeArray.length > 0) {
+      return (
+        <button style={styles.button} onClick={() => setAction("atack")}>
+          Ataque
+        </button>
+      );
+    }
+
+    return null;
+  };
 
   const returnButton = () => (
     <button style={styles.button} onClick={() => setAction("menu")}>
@@ -72,19 +82,16 @@ const ActionSubMenu = (props) => {
     </button>
   );
 
-  // if (action === "atack") {
-  //   const enemy = enemyToAtack({
-  //     enemies,
-  //     player: players[gameData.currentPlayer],
-  //   });
-  //   openAtackModal({
-  //     isOpen: true,
-  //     atacker: gameData.currentPlayer,
-  //     defender: enemy.id,
-  //     isPlayer: true,
-  //   });
-  //   setAction("menu");
-  // }
+  if (action === "atack") {
+    const enemy = enemyToAtack({ enemies: cellEnemies, currentPlayer });
+    openAtackModal({
+      isOpen: true,
+      atacker: currentPlayer,
+      defender: enemy,
+      isPlayer: true,
+    });
+    setAction("menu");
+  }
 
   if (action === "change")
     return <div style={styles.moveButtonsContainer}>{returnButton()}</div>;
@@ -119,7 +126,7 @@ const ActionSubMenu = (props) => {
 
     return (
       <div style={styles.moveButtonsContainer}>
-        {/* {atackButton()} */}
+        {atackButton()}
         {gameData.moveActions + gameData.generalActions <= 0 ? null : (
           <button style={styles.button} onClick={() => setAction("move")}>
             Mover

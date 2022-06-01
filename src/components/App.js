@@ -9,7 +9,7 @@ import Images from "../constants/Images";
 import { requestGameData } from "../services/ApiServices";
 import styles from "../styles/App";
 import CharacterModal from "../containers/CharacterModal";
-// import AtackModal from "../containers/AtackModal";
+import AtackModal from "../containers/AtackModal";
 
 const App = (props) => {
   const {
@@ -73,7 +73,7 @@ const App = (props) => {
       />
       <Map />
       <CharacterModal />
-      {/* <AtackModal /> */}
+      <AtackModal />
       {SubMenu()}
       <Menu gameData={gameData} setMinimaps={setMinimaps} />
     </div>
