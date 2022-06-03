@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactSession } from "react-client-session";
 
 import { possibleMoves } from "../helpers/helpers";
@@ -36,6 +36,8 @@ const ActionSubMenu = (props) => {
   if (gameData.currentUserId !== ReactSession.get("id")) return null;
 
   const [cellEnemies, setCellEnemies] = useState(enemies);
+
+  useEffect(() => setCellEnemies(enemies), [enemies]);
 
   const currentPlayer = characters.find(
     (character) => character.userId === ReactSession.get("id")
