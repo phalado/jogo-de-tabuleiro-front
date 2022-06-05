@@ -4,15 +4,18 @@ import { ReactSession } from "react-client-session";
 import Map from "../containers/Map";
 import Menu from "./Menu";
 import ActionSubMenu from "../containers/ActionSubMenu";
-
-import Images from "../constants/Images";
-import { requestGameData } from "../services/ApiServices";
-import styles from "../styles/App";
 import CharacterModal from "../containers/CharacterModal";
 import AtackModal from "../containers/AtackModal";
 
+import Images from "../constants/Images";
+import { requestGameData } from "../services/ApiServices";
+import { playersOnRange } from "../helpers/atackHelpers";
+import styles from "../styles/App";
+
 const App = (props) => {
   const {
+    characters,
+    enemies,
     gameData,
     setMinimaps,
     setChests,
@@ -20,6 +23,7 @@ const App = (props) => {
     setGameData,
     setCharacters,
     setEnemies,
+    openAtackModal,
   } = props;
 
   const [repeater, setRepeater] = useState(0);
@@ -36,14 +40,69 @@ const App = (props) => {
     };
 
     const callUpdateService = () => {
-      const service = requestGameData(ReactSession.get("gameId"));
-      service.then((answer) => setStateAfterRequest(answer.data));
+      const service = requestGameData(
+        ReactSession.get("gameId"),
+        gameData.numberOfActions
+      );
+      service.then((answer) => {
+        if (answer.status === 200) {
+          setStateAfterRequest(answer.data);
+        }
+      });
+
+      if (gameData.currentEnemyId > -1) {
+        const enemy = enemies.find(
+          (enemy) => enemy.id === gameData.currentEnemyId
+        );
+        const cellPlayers = playersOnRange({ characters, enemy });
+
+        openAtackModal({
+          isOpen: true,
+          atacker: enemy,
+          defender: cellPlayers[0],
+          isPlayer: false,
+        });
+      }
+
+      setTimeout(() => setRepeater((prevState) => prevState + 1), 1000);
     };
 
     callUpdateService();
-
-    setTimeout(() => setRepeater((prevState) => prevState + 1), 1000);
   }, [setChests, setDoors, setMinimaps, setGameData, setCharacters, repeater]);
+
+  // useEffect(() => {
+  //   console.log(enemyAction, gameData.enemyOrder);
+  //   if (
+  //     characters.length > 0 &&
+  //     enemies.length > 0 &&
+  //     gameData.enemyOrder &&
+  //     gameData.enemyOrder.length > 0 &&
+  //     enemyAction
+  //   ) {
+  //     gameData.enemyOrder.forEach((enemyId) => {
+  //       console.log(enemyId, enemyAction);
+  //       const enemy = enemies.find((enemy) => enemy.id === parseInt(enemyId));
+  //       const cellPlayers = playersOnRange({ characters, enemy });
+  //       changeEnemyAction(false);
+  //       if (cellPlayers.length > 0) {
+  //         openAtackModal({
+  //           isOpen: true,
+  //           atacker: enemy,
+  //           defender: cellPlayers[0],
+  //           isPlayer: false,
+  //         });
+  //         return null;
+  //       } else {
+  //         console.log(enemy, "move");
+  //         const response = moveEnemy();
+  //         response.then((answer) => {
+  //           if (answer.status === 200) changeEnemyAction(true);
+  //         });
+  //       }
+  //     });
+  //     endEnemyRound();
+  //   }
+  // }, [gameData.enemyOrder, enemies, characters]);
 
   const SubMenu = () => {
     if (gameData.open === false) return null;

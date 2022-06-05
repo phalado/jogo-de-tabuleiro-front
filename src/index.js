@@ -18,6 +18,7 @@ let initialState = {
   gameData: { round: 0, open: false },
   minimaps: [],
   characters: [],
+  enemies: [],
   currentUser: {
     username: ReactSession.get("username"),
     email: ReactSession.get("email"),
@@ -28,6 +29,7 @@ let initialState = {
   render: ReactSession.get("render") || "login",
   characterModal: { isOpen: false },
   atackModal: { isOpen: false },
+  enemyAction: true,
 };
 
 const store = createStore(

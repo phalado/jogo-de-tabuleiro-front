@@ -10,6 +10,7 @@ import render from "./render";
 import enemies from "./enemies";
 import characterModal from "./characterModal";
 import atackModal from "./atackModal";
+import enemyAction from "./enemyAction";
 
 const rootReducer = combineReducers({
   minimaps,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   enemies,
   characterModal,
   atackModal,
+  enemyAction,
 });
 
 export default rootReducer;

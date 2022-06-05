@@ -31,9 +31,13 @@ const createNewUser = async (email, password, username) => {
   return axios.post(baseUrl, params, { headers });
 };
 
-const requestGameData = async (gameId) => {
+const requestGameData = async (gameId, numberOfActions) => {
   const baseUrl = ApiStr.API_URL + "/games/game_data";
-  const params = { id: currentUserId(), game_id: gameId };
+  const params = {
+    id: currentUserId(),
+    game_id: gameId,
+    actions: numberOfActions,
+  };
 
   return axios.post(baseUrl, params, { headers });
 };
@@ -131,6 +135,27 @@ const missEnemy = async (characterType) => {
   return axios.post(baseUrl, params, { headers });
 };
 
+const hitCharacter = async (characterType) => {
+  const baseUrl = ApiStr.API_URL + "/characters/hit_character";
+  const params = { game_id: gameId(), character_type: characterType };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
+const moveEnemy = async () => {
+  const baseUrl = ApiStr.API_URL + "/enemies/move_enemy";
+  const params = { game_id: gameId() };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
+const endEnemyRound = async () => {
+  const baseUrl = ApiStr.API_URL + "/games/end_enemy_round";
+  const params = { game_id: gameId() };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
 export {
   requestGameData,
   createNewGame,
@@ -148,4 +173,7 @@ export {
   changePlayer,
   hitEnemy,
   missEnemy,
+  hitCharacter,
+  moveEnemy,
+  endEnemyRound,
 };

@@ -9,8 +9,8 @@ const enemiesOnRange = (props) => {
 };
 
 const playersOnRange = (props) => {
-  const { players, enemy } = props;
-  return Object.values(players).filter(
+  const { characters, enemy } = props;
+  return characters.filter(
     (player) => player.minimap === enemy.minimap && player.cell === enemy.cell
   );
 };

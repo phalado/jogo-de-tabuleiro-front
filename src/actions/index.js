@@ -76,6 +76,11 @@ const closeAtackModal = () => ({
   type: "CLOSE_ATACK_MODAL",
 });
 
+const changeEnemyAction = (enemyAction) => ({
+  type: "CHANGE_ENEMY_ACTION",
+  enemyAction,
+});
+
 export {
   minimapsInitialState,
   setMinimaps,
@@ -93,4 +98,5 @@ export {
   closeModal,
   openAtackModal,
   closeAtackModal,
+  changeEnemyAction,
 };

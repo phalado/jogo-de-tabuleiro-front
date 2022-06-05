@@ -6,11 +6,14 @@ import {
   setMinimaps,
   setCharacters,
   setEnemies,
+  openAtackModal,
 } from "../actions";
 
 import App from "../components/App";
 
 const mapStateToProps = (state) => ({
+  characters: state.characters,
+  enemies: state.enemies,
   gameData: state.gameData,
 });
 
@@ -21,6 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
   setGameData: (gameData) => dispatch(setGameData(gameData)),
   setCharacters: (characters) => dispatch(setCharacters(characters)),
   setEnemies: (enemies) => dispatch(setEnemies(enemies)),
+  openAtackModal: (data) => dispatch(openAtackModal(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

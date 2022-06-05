@@ -41,10 +41,9 @@ const Routing = (props) => {
 
     const callUpdateService = () => {
       if (ReactSession.get("gameId")) {
-        const service = requestGameData(ReactSession.get("gameId"));
+        const service = requestGameData(ReactSession.get("gameId"), 0);
         service.then((answer) => {
-          setGameData(answer.data.gameData);
-          ReactSession.set("gameId", answer.data.gameData.gameId);
+          if (answer.status === 200) setGameData(answer.data.gameData);
         });
       }
     };
@@ -128,6 +127,7 @@ const Routing = (props) => {
   const startGame = (gameId) => {
     const service = gameStart(gameId);
     service.then((answer) => setGameData(answer.data.gameData));
+    setRenderState("game");
   };
 
   switch (render) {

@@ -36,29 +36,34 @@ const ActionSubMenu = (props) => {
   if (gameData.currentUserId !== ReactSession.get("id")) return null;
 
   const [cellEnemies, setCellEnemies] = useState(enemies);
+  const [currentPlayer, setCurrentPlayer] = useState({});
+  const [minimap, setMinimap] = useState({});
 
-  useEffect(() => setCellEnemies(enemies), [enemies]);
-
-  const currentPlayer = characters.find(
-    (character) => character.userId === ReactSession.get("id")
-  );
-
-  const minimap = minimaps.find(
-    (minimap) => minimap.position === currentPlayer.minimap
-  );
+  useEffect(() => {
+    setCellEnemies(enemies);
+    setCurrentPlayer(
+      characters.find(
+        (character) => character.userId === ReactSession.get("id")
+      )
+    );
+    setMinimap(
+      minimaps.find((minimap) => minimap.position === currentPlayer.minimap)
+    );
+  }, [enemies, characters, minimaps]);
 
   const movePin = (direction) => {
     if (gameData.moveActions + gameData.generalActions <= 0) return null;
 
     moveCharacter(currentPlayer.characterType, direction).then((answer) => {
-      setCharacters(answer.data);
+      setCharacters(answer.data.characters);
     });
     setAction("menu");
   };
 
   const atackButton = () => {
     if (
-      Object.keys(cellEnemies).length === 0 ||
+      !currentPlayer ||
+      cellEnemies.length === 0 ||
       gameData.atackActions + gameData.generalActions <= 0
     )
       return null;
