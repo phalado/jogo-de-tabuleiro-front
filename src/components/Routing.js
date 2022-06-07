@@ -101,8 +101,8 @@ const Routing = (props) => {
     service.then((answer) => {
       setGameData(answer.data.gameData);
       ReactSession.set("gameId", answer.data.gameData.gameId);
+      setRenderState("char");
     });
-    setRenderState("char");
   };
 
   const joinGame = (gameId) => {

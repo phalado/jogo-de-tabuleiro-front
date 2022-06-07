@@ -137,6 +137,17 @@ const CellStyles = {
     right: "-5px",
     top: "-5px",
   },
+  shieldContainer: {
+    width: "20%",
+    height: "20%",
+    position: "absolute",
+    right: "-5px",
+    bottom: "0px",
+    zIndex: 2,
+  },
+  shieldIcon: {
+    width: "100%",
+  },
 };
 
 export default CellStyles;

@@ -156,6 +156,13 @@ const endEnemyRound = async () => {
   return axios.post(baseUrl, params, { headers });
 };
 
+const addDefenderToCell = async (cellId, characterType) => {
+  const baseUrl = ApiStr.API_URL + "/characters/add_defender_to_cell";
+  const params = { game_id: gameId(), cell_id: cellId, character_type: characterType };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
 export {
   requestGameData,
   createNewGame,
@@ -176,4 +183,5 @@ export {
   hitCharacter,
   moveEnemy,
   endEnemyRound,
+  addDefenderToCell,
 };

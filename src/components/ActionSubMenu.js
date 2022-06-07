@@ -16,6 +16,7 @@ import {
   moveCharacter,
   openChest,
   changePlayer,
+  addDefenderToCell,
 } from "../services/ApiServices";
 
 const ActionSubMenu = (props) => {
@@ -38,6 +39,7 @@ const ActionSubMenu = (props) => {
   const [cellEnemies, setCellEnemies] = useState(enemies);
   const [currentPlayer, setCurrentPlayer] = useState({});
   const [minimap, setMinimap] = useState({});
+  const [cell, setCell] = useState({});
 
   useEffect(() => {
     setCellEnemies(enemies);
@@ -49,6 +51,10 @@ const ActionSubMenu = (props) => {
     setMinimap(
       minimaps.find((minimap) => minimap.position === currentPlayer.minimap)
     );
+    if (minimap && minimap.cells)
+      setCell(
+        minimap.cells.find((cell) => cell.position === currentPlayer.cell)
+      );
   }, [enemies, characters, minimaps]);
 
   const movePin = (direction) => {
@@ -58,6 +64,11 @@ const ActionSubMenu = (props) => {
       setCharacters(answer.data.characters);
     });
     setAction("menu");
+  };
+
+  const setDefender = () => {
+    const cellId = cell.id;
+    addDefenderToCell(cellId, currentPlayer.characterType);
   };
 
   const atackButton = () => {
@@ -110,6 +121,30 @@ const ActionSubMenu = (props) => {
         chest.cell === currentPlayer.cell
     );
 
+    const defenderButton = () => {
+      console.log(cell);
+      if (
+        cell &&
+        cell.defender !== null &&
+        gameData.sceneryActions + gameData.generalActions <= 0
+      )
+        return null;
+
+      return (
+        <button
+          style={styles.button}
+          onClick={() => {
+            if (
+              window.confirm("Defender jogadores na célular e encerrar jogada?")
+            )
+              setDefender();
+          }}
+        >
+          Defender
+        </button>
+      );
+    };
+
     const openChestButton = () => {
       if (
         chest &&
@@ -142,21 +177,7 @@ const ActionSubMenu = (props) => {
         <button style={styles.button} onClick={() => setAction("change")}>
           Trocar
         </button>
-        {/* <button
-          style={styles.button}
-          onClick={() => {
-            if (
-              window.confirm(
-                "Defender jogadores na célular e finalizar jogada?"
-              )
-            ) {
-              setDefender(gameData.currentPlayer);
-              changePlayer(true);
-            }
-          }}
-        >
-          Defender
-        </button> */}
+        {defenderButton()}
         <button
           style={styles.button}
           onClick={() => {

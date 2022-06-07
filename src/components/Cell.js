@@ -23,7 +23,18 @@ const Cell = (props) => {
     openModal,
   } = props;
 
-  const { north, south, east, west, inside, noise, enemyPortal } = cell;
+  const {
+    north,
+    south,
+    east,
+    west,
+    inside,
+    noise,
+    enemyPortal,
+    defender,
+  } = cell;
+
+  console.log(cell);
   const floor = inside ? Images.floorWood : Images.floorRocks;
 
   const currentPlayer = characters.find(
@@ -76,6 +87,16 @@ const Cell = (props) => {
   const chest = chests.find(
     (chest) => chest.minimap === minimapPosition && chest.cell === cell.position
   );
+
+  const shieldIcon = () => {
+    if (defender === null) return null;
+
+    return (
+      <div style={styles.shieldContainer} title={"Defensor: " + defender}>
+        <img src={Images.shieldIcon} style={styles.shieldIcon} alt={"Escudo"} />
+      </div>
+    );
+  };
 
   const cellCharacters = characters.filter(
     (char) => char.minimap === minimapPosition && char.cell === cell.position
@@ -135,6 +156,7 @@ const Cell = (props) => {
         })}
         {soundIcon()}
         {enemyPortalImage()}
+        {shieldIcon()}
       </div>
     );
   };

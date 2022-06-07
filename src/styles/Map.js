@@ -36,6 +36,9 @@ const MapStyles = {
     borderRadius: "10%",
     color: "white",
     fontSize: "15px",
+    "&:hover": {
+      backgroundColor: "#808080bf",
+    },
   },
   moveButtonsContainer: {
     width: "100%",
