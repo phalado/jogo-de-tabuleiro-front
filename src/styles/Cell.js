@@ -148,6 +148,10 @@ const CellStyles = {
   shieldIcon: {
     width: "100%",
   },
+  teleportal: {
+    position: "absolute",
+    top: "-10%",
+  },
 };
 
 export default CellStyles;

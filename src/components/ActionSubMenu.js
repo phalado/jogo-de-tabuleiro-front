@@ -17,6 +17,7 @@ import {
   openChest,
   changePlayer,
   addDefenderToCell,
+  teleportCharacter,
 } from "../services/ApiServices";
 
 const ActionSubMenu = (props) => {
@@ -55,7 +56,7 @@ const ActionSubMenu = (props) => {
       setCell(
         minimap.cells.find((cell) => cell.position === currentPlayer.cell)
       );
-  }, [enemies, characters, minimaps]);
+  }, [enemies, characters, minimaps, minimap]);
 
   const movePin = (direction) => {
     if (gameData.moveActions + gameData.generalActions <= 0) return null;
@@ -121,11 +122,32 @@ const ActionSubMenu = (props) => {
         chest.cell === currentPlayer.cell
     );
 
-    const defenderButton = () => {
-      console.log(cell);
+    const teleport = () => {
       if (
-        cell &&
-        cell.defender !== null &&
+        (cell && cell.portalTo === null) ||
+        gameData.moveActions + gameData.generalActions <= 0
+      )
+        return null;
+
+      return (
+        <button
+          style={styles.button}
+          onClick={() =>
+            teleportCharacter(
+              currentPlayer.characterType,
+              cell.portalTo.minimap,
+              cell.portalTo.cell
+            )
+          }
+        >
+          Teleportar
+        </button>
+      );
+    };
+
+    const defenderButton = () => {
+      if (
+        (cell && cell.defender !== null) ||
         gameData.sceneryActions + gameData.generalActions <= 0
       )
         return null;
@@ -177,6 +199,7 @@ const ActionSubMenu = (props) => {
         <button style={styles.button} onClick={() => setAction("change")}>
           Trocar
         </button>
+        {teleport()}
         {defenderButton()}
         <button
           style={styles.button}

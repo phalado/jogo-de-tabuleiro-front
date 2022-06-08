@@ -158,7 +158,23 @@ const endEnemyRound = async () => {
 
 const addDefenderToCell = async (cellId, characterType) => {
   const baseUrl = ApiStr.API_URL + "/characters/add_defender_to_cell";
-  const params = { game_id: gameId(), cell_id: cellId, character_type: characterType };
+  const params = {
+    game_id: gameId(),
+    cell_id: cellId,
+    character_type: characterType,
+  };
+
+  return axios.post(baseUrl, params, { headers });
+};
+
+const teleportCharacter = async (characterType, minimap, cell) => {
+  const baseUrl = ApiStr.API_URL + "/characters/teleport_character";
+  const params = {
+    game_id: gameId(),
+    character_type: characterType,
+    minimap,
+    cell,
+  };
 
   return axios.post(baseUrl, params, { headers });
 };
@@ -184,4 +200,5 @@ export {
   moveEnemy,
   endEnemyRound,
   addDefenderToCell,
+  teleportCharacter,
 };

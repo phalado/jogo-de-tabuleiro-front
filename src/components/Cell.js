@@ -32,9 +32,9 @@ const Cell = (props) => {
     noise,
     enemyPortal,
     defender,
+    portalTo,
   } = cell;
 
-  console.log(cell);
   const floor = inside ? Images.floorWood : Images.floorRocks;
 
   const currentPlayer = characters.find(
@@ -98,6 +98,16 @@ const Cell = (props) => {
     );
   };
 
+  const portal = () => {
+    if (portalTo === null) return null;
+
+    return (
+      <div style={styles.teleportal}>
+        <img src={Images.portal} style={styles.shieldIcon} alt={"Teleportal"} />
+      </div>
+    );
+  };
+
   const cellCharacters = characters.filter(
     (char) => char.minimap === minimapPosition && char.cell === cell.position
   );
@@ -112,6 +122,7 @@ const Cell = (props) => {
   const insideElements = () => {
     return (
       <div style={styles.insideElements}>
+        {portal()}
         {!chest ? null : (
           <Chest
             name={chest.name}

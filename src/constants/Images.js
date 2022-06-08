@@ -16,6 +16,7 @@ const Images = {
   enemyPortal: "./contents/images/enemy-portal.png",
   menuIcon: "./contents/images/menuIcon.png",
   shieldIcon: "./contents/images/shieldIcon.svg",
+  portal: "./contents/images/portal.png",
   chest: {
     red: {
       open: "./contents/images/chest-red-opened.png",

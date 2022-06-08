@@ -46,6 +46,7 @@ const App = (props) => {
       );
       service.then((answer) => {
         if (answer.status === 200) {
+          console.log(answer);
           setStateAfterRequest(answer.data);
         }
       });
@@ -54,12 +55,14 @@ const App = (props) => {
         const enemy = enemies.find(
           (enemy) => enemy.id === gameData.currentEnemyId
         );
-        const cellPlayers = playersOnRange({ characters, enemy });
+        console.log(gameData);
 
         openAtackModal({
           isOpen: true,
           atacker: enemy,
-          defender: cellPlayers[0],
+          defender: characters.find(
+            (char) => char.characterType === gameData.atackedCharacter
+          ),
           isPlayer: false,
         });
       }
