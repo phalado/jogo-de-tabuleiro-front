@@ -44,5 +44,17 @@
   },
   "devDependencies": {
     "react-axios": "^2.0.5"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phalado/jogo-de-tabuleiro-front.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phalado/jogo-de-tabuleiro-front/issues"
+  },
+  "homepage": "https://github.com/phalado/jogo-de-tabuleiro-front#readme"
 }
