@@ -71,7 +71,7 @@ const CharacterData = {
       extraHabilities: {}
     },
     thief: {
-      name: "ladrão",
+      name: "Ladrão",
       description: "Descrição do ladrão",
       hability: "Habilidade do ladrão",
       precision: 0,

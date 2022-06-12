@@ -42,7 +42,7 @@ const MapStyles = {
   },
   moveButtonsContainer: {
     width: "100%",
-    height: "45%",
+    height: "40%",
     marginTop: "10%",
     marginBottom: "10%",
     display: "flex",
@@ -82,6 +82,15 @@ const MapStyles = {
     width: "80%",
     height: "50%",
   },
+  actionButtons: {
+    height: "15%",
+    backgroundColor: 'white',
+    border: 'none',
+    opacity: "100%"
+  },
+  sideMenuImage: {
+    height: "100%"
+  }
 };
 
 export default MapStyles;

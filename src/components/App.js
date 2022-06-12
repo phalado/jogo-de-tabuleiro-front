@@ -113,13 +113,90 @@ const App = (props) => {
     return (
       <div style={styles.asideBar}>
         <div style={styles.gameData}>
-          <span>Round: {gameData.round}</span>
-          <span>Jogador atual: {gameData.roundOrder[0]}</span>
-          <span>Açoes gerais: {gameData.generalActions}</span>
-          <span>Ações de movimento: {gameData.moveActions}</span>
-          <span>Açoes de ataque: {gameData.atackActions}</span>
-          <span>Açoes de cenário: {gameData.sceneryActions}</span>
-          <span>Level da fase: {gameData.gameLevel}</span>
+          <span style={styles.sideMenu.container}>
+            <img
+              src={Images.sideMenu.round}
+              style={styles.sideMenu.left}
+              alt="Round"
+            />
+            <img
+              src={Images.numbers[gameData.round]}
+              style={styles.sideMenu.right}
+              alt={gameData.round}
+            />
+          </span>
+          <span style={styles.sideMenu.container}>
+            <img
+              src={Images.sideMenu.actualPlayer}
+              style={styles.sideMenu.left}
+              alt="Actual player"
+            />
+            <img
+              src={Images.sideMenu[gameData.roundOrder[0]]}
+              style={styles.sideMenu.right}
+              alt={gameData.roundOrder[0]}
+            />
+          </span>
+          <span style={styles.sideMenu.container}>
+            <img
+              src={Images.sideMenu.generalActions}
+              style={styles.sideMenu.left}
+              alt="Ações gerais"
+            />
+            <img
+              src={Images.numbers[gameData.generalActions]}
+              style={styles.sideMenu.right}
+              alt={gameData.generalActions}
+            />
+          </span>
+          <span style={styles.sideMenu.container}>
+            <img
+              src={Images.sideMenu.movementActions}
+              style={styles.sideMenu.left}
+              alt="Ações de movimento"
+            />
+            <img
+              src={Images.numbers[gameData.moveActions]}
+              style={styles.sideMenu.right}
+              alt={gameData.moveActions}
+            />
+          </span>
+          <span style={styles.sideMenu.container}>
+            <img
+              src={Images.sideMenu.atackActions}
+              style={styles.sideMenu.left}
+              alt="Ações de ataque"
+            />
+            <img
+              src={Images.numbers[gameData.atackActions]}
+              style={styles.sideMenu.right}
+              alt={gameData.atackActions}
+            />
+          </span>
+          <span style={styles.sideMenu.container}>
+            <img
+              src={Images.sideMenu.sceneryActions}
+              style={styles.sideMenu.left}
+              alt="Ações de ataque"
+            />
+            <img
+              src={Images.numbers[gameData.sceneryActions]}
+              style={styles.sideMenu.right}
+              alt={gameData.sceneryActions}
+            />
+          </span>
+          <span style={styles.sideMenu.container}>
+            <img
+              src={Images.sideMenu.gameLevel}
+              style={styles.sideMenu.left}
+              alt="Level da fase"
+            />
+            <img
+              src={Images.numbers[gameData.gameLevel]}
+              style={styles.sideMenu.right}
+              alt={gameData.gameLevel}
+            />
+          </span>
         </div>
         <ActionSubMenu action={action} setAction={setAction} />
       </div>

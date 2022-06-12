@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ReactSession } from "react-client-session";
 
-import { possibleMoves } from "../helpers/helpers";
+import ActionButton from "./ActionButton";
 
+import { possibleMoves } from "../helpers/helpers";
 import {
   enemiesOnRange,
   enemyToAtack,
@@ -10,8 +11,8 @@ import {
 } from "../helpers/atackHelpers";
 
 import Images from "../constants/Images";
-
 import styles from "../styles/Map";
+
 import {
   moveCharacter,
   openChest,
@@ -45,9 +46,7 @@ const ActionSubMenu = (props) => {
   useEffect(() => {
     setCellEnemies(enemies);
     setCurrentPlayer(
-      characters.find(
-        (character) => character.userId === ReactSession.get("id")
-      )
+      characters.find((character) => character.userId === ReactSession.get("id"))
     );
     setMinimap(
       minimaps.find((minimap) => minimap.position === currentPlayer.minimap)
@@ -86,9 +85,11 @@ const ActionSubMenu = (props) => {
     });
     if (enemiesOnRangeArray.length > 0) {
       return (
-        <button style={styles.button} onClick={() => setAction("atack")}>
-          Ataque
-        </button>
+        <ActionButton
+          onClickAction={() => setAction('atack')}
+          buttonImage={Images.sideMenu.atackButton}
+          alt={'Botão de ataque'}
+        />
       );
     }
 
@@ -96,9 +97,11 @@ const ActionSubMenu = (props) => {
   };
 
   const returnButton = () => (
-    <button style={styles.button} onClick={() => setAction("menu")}>
-      Voltar
-    </button>
+    <ActionButton
+      onClickAction={() => setAction('menu')}
+      buttonImage={Images.sideMenu.backButton}
+      alt={'Botão de voltar'}
+    />
   );
 
   if (action === "atack") {
@@ -112,7 +115,7 @@ const ActionSubMenu = (props) => {
     setAction("menu");
   }
 
-  if (action === "change")
+  if (action === "trade")
     return <div style={styles.moveButtonsContainer}>{returnButton()}</div>;
 
   if (action === "menu") {
@@ -130,19 +133,16 @@ const ActionSubMenu = (props) => {
         return null;
 
       return (
-        <button
-          style={styles.button}
-          onClick={() =>
-            teleportCharacter(
+        <ActionButton
+          onClickAction={() => teleportCharacter(
               currentPlayer.characterType,
               cell.portalTo.minimap,
               cell.portalTo.cell
-            )
-          }
-        >
-          Teleportar
-        </button>
-      );
+            )}
+          buttonImage={Images.sideMenu.teleportButton}
+          alt={'Botão de teleporte'}
+        />
+      )
     };
 
     const defenderButton = () => {
@@ -153,18 +153,15 @@ const ActionSubMenu = (props) => {
         return null;
 
       return (
-        <button
-          style={styles.button}
-          onClick={() => {
-            if (
-              window.confirm("Defender jogadores na célular e encerrar jogada?")
-            )
+        <ActionButton
+          onClickAction={() =>  {
+            if (window.confirm("Defender jogadores na célular e encerrar jogada?"))
               setDefender();
           }}
-        >
-          Defender
-        </button>
-      );
+          buttonImage={Images.sideMenu.defendButton}
+          alt={'Botão de defesa'}
+        />
+      )
     };
 
     const openChestButton = () => {
@@ -174,17 +171,12 @@ const ActionSubMenu = (props) => {
         gameData.sceneryActions + gameData.generalActions > 0
       ) {
         return (
-          <button
-            style={styles.button}
-            onClick={() => {
-              openChest(chest.name, false).then((answer) =>
-                setChests(answer.data)
-              );
-            }}
-          >
-            Abrir baú
-          </button>
-        );
+          <ActionButton
+            onClickAction={() => openChest(chest.name, false).then((answer) => setChests(answer.data))}
+            buttonImage={Images.sideMenu.chestButton}
+            alt={'Abrir baú'}
+          />
+        )
       }
     };
 
@@ -192,23 +184,24 @@ const ActionSubMenu = (props) => {
       <div style={styles.moveButtonsContainer}>
         {atackButton()}
         {gameData.moveActions + gameData.generalActions <= 0 ? null : (
-          <button style={styles.button} onClick={() => setAction("move")}>
-            Mover
-          </button>
+          <ActionButton
+            onClickAction={() => setAction("move")}
+            buttonImage={Images.sideMenu.moveButton}
+            alt={'Botão de movimento'}
+          />
         )}
-        <button style={styles.button} onClick={() => setAction("change")}>
-          Trocar
-        </button>
+        <ActionButton
+          onClickAction={() => setAction("trade")}
+          buttonImage={Images.sideMenu.tradeButton}
+          alt={'Botão de troca'}
+        />
         {teleport()}
         {defenderButton()}
-        <button
-          style={styles.button}
-          onClick={() => {
-            if (window.confirm("Encerrar jogada?")) changePlayer();
-          }}
-        >
-          Encerrar ação
-        </button>
+        <ActionButton
+          onClickAction={() => { if (window.confirm("Encerrar jogada?")) changePlayer()}}
+          buttonImage={Images.sideMenu.finishButton}
+          alt={'Botão de finalização'}
+        />
         {openChestButton()}
       </div>
     );

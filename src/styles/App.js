@@ -74,13 +74,31 @@ const AppStyles = {
   },
   gameData: {
     width: "90%",
-    height: "36%",
+    height: "50%",
     margin: "5%",
     textAlign: "center",
     justifyContent: "space-between",
     flexDirection: "column",
     display: "flex",
   },
+  sideMenu: {
+    container: {
+      height: "12%",
+      display: "flex",
+      justifyContent: "space-between",
+      alignContent: 'center',
+      marginBottom: "2%"
+    },
+    left: {
+      width: "50%",
+      height: "100%"
+    },
+    right: {
+      width: "40%",
+      height: "100%",
+      alignSelf: 'center'
+    }
+  }
 };
 
 export default AppStyles;

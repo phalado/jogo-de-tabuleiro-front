@@ -7,6 +7,7 @@ const ChestStyles = {
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
+    zIndex: 2
   },
   chest: {
     height: "100%",
