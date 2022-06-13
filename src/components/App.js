@@ -9,7 +9,6 @@ import AtackModal from "../containers/AtackModal";
 
 import Images from "../constants/Images";
 import { requestGameData } from "../services/ApiServices";
-import { playersOnRange } from "../helpers/atackHelpers";
 import styles from "../styles/App";
 
 const App = (props) => {
